@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa vlasti Srbije</title>
+<meta name="description" content="Interaktivna šema institucija Srbije: ko koga bira i kontroliše, i šta se dešavalo u svakoj instituciji od vanrednih izbora 2026.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--BODY-->
+<header class="top">
+  <div class="top-in pad">
+    <div class="brand"><a href="#" data-home="1">Mapa vlasti Srbije</a><span class="lbl">Stanje 12. 11. 2026.</span></div>
+    <div class="search">
+      <svg class="si" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      <input id="q" type="search" placeholder="Traži instituciju, osobu ili vest" autocomplete="off" aria-label="Pretraga" aria-controls="qres">
+      <kbd>Ctrl K</kbd>
+      <div id="qres" class="qres" role="listbox" hidden></div>
+    </div>
+    <nav class="views" role="tablist" aria-label="Prikaz">
+      <button role="tab" data-view="lanac" aria-selected="true">Ko koga bira</button>
+      <button role="tab" data-view="nadredjenost" aria-selected="false">Ko je kome nadređen</button>
+      <button role="tab" data-view="nivoi" aria-selected="false">Nivoi vlasti</button>
+    </nav>
+    <div class="menus">
+      <details class="menu">
+        <summary>Vodiči</summary>
+        <div class="menu-b">
+          <span class="lbl">Kako funkcioniše</span><div id="guides-paths" style="display:grid;gap:2px"></div>
+          <span class="lbl">Slučajevi</span><div id="guides-cases" style="display:grid;gap:2px"></div>
+        </div>
+      </details>
+      <details class="menu">
+        <summary aria-label="Podešavanja">Pismo</summary>
+        <div class="menu-b" style="width:200px">
+          <span class="lbl">Pismo</span>
+          <button class="mi" data-script="lat" aria-pressed="true">Latinica</button>
+          <button class="mi nt" data-script="cyr" aria-pressed="false">Ћирилица</button>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<section class="state pad" aria-label="Trenutno stanje">
+  <div><span class="lbl">Predsednik Republike</span><span class="v">Ana Brnabić, v.d.</span><span class="s">Izbori: raspisivanje do 27. 11, glasanje do 27. 12.</span></div>
+  <div><span class="lbl">Narodna skupština</span><span class="v">140 · 103 · 7</span><span class="s">Konstitutivna sednica 17. 11.</span></div>
+  <div><span class="lbl">Vlada</span><span class="v">Đuro Macut</span><span class="s">Tehnički mandat; nova vlada u roku od 90 dana</span></div>
+  <div><span class="lbl">Vrhovno javno tužilaštvo</span><span class="v">Zagorka Dolovac</span><span class="s">Komisija kontroliše VJT u Beogradu</span></div>
+</section>
+
+<main class="board pad" id="mapa">
+  <div class="stage" id="stage"></div>
+  <aside class="panel" id="panel" aria-live="polite" aria-label="Detalji"></aside>
+</main>
+
+<section class="lower pad">
+  <div>
+    <h2>Skraćenice</h2>
+    <dl class="gloss" id="gloss"></dl>
+  </div>
+  <div>
+    <h2>Sve vesti</h2>
+    <div class="allbar">
+      <label for="f-inst" class="lbl">Institucija</label>
+      <select id="f-inst"></select>
+      <span id="allperiod"></span>
+      <span class="muted" id="count"></span>
+    </div>
+    <div class="alllist" id="alllist"></div>
+  </div>
+</section>
+
+<footer class="pad">
+  <p>Nezavisan, nezvaničan pregled za razumevanje strukture vlasti. Ne koristi zvanične grbove ni znakove institucija; piktogrami su nacrtani za ovu šemu. Linkovi „zvanični sajt“ vode na sajtove samih institucija.</p>
+  <p>Šema pojednostavljuje ustavni poredak posle ustavnih amandmana iz 2022. Vesti su sakupljene iz medija i zvaničnih saopštenja zaključno sa 12. 11. 2026, uz više izvora gde postoje. Krivične prijave i istrage nisu presude; za sve pomenute važi pretpostavka nevinosti. Oznaka <span class="unc">nepotvrđeno</span> znači da se izvori razlikuju ili da podatak nije proveren u primarnom izvoru.</p>
+</footer>
+<!--/BODY-->
+<script src="data/institucije.js"></script>
+<script src="data/vesti.js"></script>
+<script src="data/dopune.js"></script>
+<script src="data/ljudi.js"></script>
+<script src="data/lokalno.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/lanac.js"></script>
+<script src="js/nadredjenost.js"></script>
+<script src="js/nivoi.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

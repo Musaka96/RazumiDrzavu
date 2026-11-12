@@ -1,0 +1,291 @@
+/* Mapa vlasti Srbije — stil.
+   Okvir: gornja traka (pretraga, prikazi, vodiči), pozornica sa prikazom levo, panel desno (na telefonu donji list).
+   Ton: institucionalni izveštaj — mirne površine; boja i šrafura označavaju granu vlasti. */
+:root{
+  --bg:#f4f5f7; --surface:#ffffff; --surface-2:#eef0f3; --text:#141a24; --muted:#5a6475; --line:#d9dde3; --line-strong:#aeb5c0;
+  --accent:#0f2f5c; --accent-soft:#e3eaf4; --alert:#b42318; --flash:#fff3c4;
+  --c-leg:#2457a6; --c-exe:#b0522a; --c-jud:#2b7a54; --c-pro:#6c3f91; --c-ind:#93700f; --c-lok:#21808c; --c-act:#5d6878;
+  --f-display:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-body:"IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
+  --f-cond:"IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --topbar:64px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1218; --surface:#171b23; --surface-2:#1e2430; --text:#e7eaf0; --muted:#9aa3b2; --line:#2b3240; --line-strong:#465061;
+  --accent:#9cc0f5; --accent-soft:#1f2c42; --alert:#ff7b6e; --flash:#3b3415;
+  --c-leg:#7fa8ec; --c-exe:#e8946b; --c-jud:#6fc79c; --c-pro:#bf96e3; --c-ind:#d9b45a; --c-lok:#64c3cf; --c-act:#9aa6b8;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1218; --surface:#171b23; --surface-2:#1e2430; --text:#e7eaf0; --muted:#9aa3b2; --line:#2b3240; --line-strong:#465061;
+  --accent:#9cc0f5; --accent-soft:#1f2c42; --alert:#ff7b6e; --flash:#3b3415;
+  --c-leg:#7fa8ec; --c-exe:#e8946b; --c-jud:#6fc79c; --c-pro:#bf96e3; --c-ind:#d9b45a; --c-lok:#64c3cf; --c-act:#9aa6b8;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+:root{padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.2;font-weight:700}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit}
+.lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted);font-size:13.5px}
+.btn{all:unset;cursor:pointer;display:inline-block;padding:7px 14px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--accent)}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- Gornja traka ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{max-width:1640px;margin:0 auto;padding-block:10px;display:grid;grid-template-columns:auto minmax(220px,420px) 1fr auto;gap:12px 18px;align-items:center}
+.brand{display:grid;line-height:1.15}
+.brand a{font-family:var(--f-display);font-weight:700;font-size:19px;color:var(--text);text-decoration:none}
+.brand .lbl{font-size:10px}
+.search{position:relative}
+.search input{width:100%;font:inherit;font-size:14px;padding:8px 64px 8px 34px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--text)}
+.search input:focus{outline:2px solid var(--accent);outline-offset:0;background:var(--surface)}
+.search .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2;pointer-events:none}
+.search kbd{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px;pointer-events:none}
+.qres{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;box-shadow:0 12px 32px rgba(10,20,40,.16);padding:6px;max-height:min(70vh,520px);overflow:auto;z-index:40}
+.qg{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 8px 4px}
+.qi{all:unset;box-sizing:border-box;cursor:pointer;display:grid;width:100%;padding:7px 9px;border-radius:6px}
+.qi.on,.qi:hover{background:var(--accent-soft)}
+.ql{font-size:14px;font-weight:500}
+.qs{font-size:12px;color:var(--muted)}
+.qe{padding:10px;color:var(--muted);font-size:13.5px}
+.views{display:inline-flex;justify-self:start;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--bg)}
+.views button{all:unset;cursor:pointer;padding:7px 14px;font-size:14px;white-space:nowrap}
+.views button+button{border-left:1px solid var(--line)}
+.views button[aria-selected="true"]{background:var(--accent);color:var(--surface)}
+.views button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.menus{display:flex;gap:8px}
+details.menu{position:relative}
+details.menu summary{list-style:none;cursor:pointer;padding:7px 12px;border:1px solid var(--line-strong);border-radius:8px;font-size:14px;background:var(--surface);user-select:none}
+details.menu summary::-webkit-details-marker{display:none}
+details.menu[open] summary{border-color:var(--accent)}
+.menu-b{position:absolute;right:0;top:calc(100% + 6px);width:290px;background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;box-shadow:0 12px 32px rgba(10,20,40,.16);padding:8px;z-index:40;display:grid;gap:2px}
+.menu-b .lbl{padding:8px 8px 4px}
+.mi{all:unset;cursor:pointer;padding:7px 9px;border-radius:6px;font-size:14px}
+.mi:hover,.mi[aria-pressed="true"]{background:var(--accent-soft)}
+.mi:focus-visible{outline:2px solid var(--accent)}
+
+/* ---------- Stanje ---------- */
+.state{max-width:1640px;margin:16px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.state div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 14px;display:grid;gap:1px;align-content:start}
+.state .v{font-family:var(--f-display);font-weight:700;font-size:17px}
+.state .s{font-size:12.5px;color:var(--muted)}
+
+/* ---------- Pozornica i panel ---------- */
+.board{max-width:1640px;margin:16px auto 0;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:18px;align-items:start}
+.stage{min-width:0}
+.panel{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--topbar) + 12px);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--wc,var(--accent));border-radius:10px;max-height:calc(100vh - var(--topbar) - 28px);overflow:auto;min-width:0}
+.p-top{display:flex;justify-content:space-between;gap:8px;padding:10px 14px 0;position:sticky;top:0;background:var(--surface);z-index:2}
+.pbtn{all:unset;cursor:pointer;font-size:13px;color:var(--muted);padding:3px 6px;border-radius:5px}
+.pbtn:hover{color:var(--text);background:var(--surface-2)}
+.pbtn:focus-visible{outline:2px solid var(--accent)}
+.p-body{padding:6px 20px 20px;display:grid;gap:14px}
+.p-body h2{font-size:22px}
+.ph{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center}
+.ph .ico{width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--wc) 13%,var(--surface))}
+.ph .ico svg,.c-ico svg,.tiph svg{fill:none;stroke:var(--wc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-inline:-4px}
+.tabs button{all:unset;cursor:pointer;padding:8px 10px;font-size:14px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--wc,var(--accent));font-weight:500}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tc{font-family:var(--f-mono);font-size:11px;color:var(--muted);background:var(--surface-2);border-radius:9px;padding:0 6px;margin-left:2px}
+.p-body dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:13.5px}
+.p-body dt{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.p-body dd{margin:0}
+.sec,.sec0{display:grid;gap:12px}
+.sec{border-top:1px solid var(--line);padding-top:14px}
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:13.5px}
+.chain li+li::before{content:"→";color:var(--muted);margin-right:6px}
+.rl{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rr{font-size:14px}
+.rv{color:var(--muted)}
+.ri{font-size:13px;color:var(--muted);margin-top:2px}
+.pl{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pl li{display:grid;font-size:13.5px}
+.vbar{display:flex;justify-content:flex-start}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:6px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:4px 10px;font-size:12.5px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.starts{display:grid;gap:8px}
+.start{all:unset;cursor:pointer;display:grid;gap:1px;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+.start:hover{border-color:var(--accent);background:var(--accent-soft)}
+.start:focus-visible{outline:2px solid var(--accent)}
+.start span{font-size:12.5px;color:var(--muted)}
+.lk{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent);text-underline-offset:3px}
+.lk:hover{text-decoration-color:var(--accent)}
+.lk:focus-visible{outline:2px solid var(--accent)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;counter-increment:s}
+.steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--surface);display:grid;place-items:center;font-family:var(--f-mono);font-size:12px}
+.steps .st{font-weight:600}
+.steps .sd{font-size:13.5px}
+.steps .now{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* Vesti */
+.item{display:grid;gap:4px;min-width:0;border-radius:6px;transition:background .6s}
+.item.flash{background:var(--flash);box-shadow:0 0 0 6px var(--flash)}
+.item time{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.item .t{font-weight:600;font-size:14.5px;line-height:1.35}
+.item .x{font-size:13.5px}
+.item .meta{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12.5px;align-items:baseline}
+.item .src a{margin-right:9px;white-space:nowrap}
+.unc{font-family:var(--f-mono);font-size:10.5px;color:var(--alert);text-transform:uppercase;letter-spacing:.06em;border:1px solid currentColor;border-radius:3px;padding:0 4px}
+
+/* Legenda: boja + šrafura */
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:20px;height:14px;border:1px solid var(--wc);border-top:3px solid var(--wc);border-radius:2px;background-color:var(--surface)}
+
+/* ---------- Prikaz: Ko koga bira ---------- */
+.lanac{position:relative;display:grid;gap:10px}
+.edges{position:absolute;left:0;top:0;pointer-events:none;z-index:2;overflow:visible}
+.tier{position:relative}
+.lanac .card,.hier .card,.niv .card{z-index:3}
+.eg .e{fill:none;stroke:var(--accent);stroke-width:1.7;opacity:.85;transition:stroke-width .12s,opacity .12s}
+.eg.down .e{stroke-dasharray:5 4}
+.eg.route .e{stroke-width:2.4;stroke-dasharray:2 5;stroke-linecap:round}
+.eg .ehit{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:help}
+.eg.hot .e{stroke-width:3.2;opacity:1}
+.lanac.ehover .eg:not(.hot) .e,.hier.ehover .eg:not(.hot) .e,.niv.ehover .eg:not(.hot) .e{opacity:.2}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 14px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start}
+.tier-h{display:grid;gap:3px;position:sticky;top:calc(var(--topbar) + 16px)}
+.tier-n{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.tier-h h3{font-size:16px}
+.tier-h p{font-size:12.5px;color:var(--muted)}
+.tier-out{background:transparent;border-style:dashed}
+.tier-b{display:flex;flex-wrap:wrap;gap:12px 18px;min-width:0}
+.grp{display:grid;gap:6px;align-content:start;min-width:0}
+.grp-l{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--wc)}
+.cards{display:flex;flex-wrap:wrap;gap:8px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:start;width:190px;min-height:62px;padding:10px 10px 9px;border:1px solid var(--line-strong);border-top:3px solid var(--wc);border-radius:6px;background:var(--surface);transition:opacity .15s,box-shadow .15s,transform .15s;z-index:1;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;opacity:.13;pointer-events:none}
+.card[data-b="leg"]::before,.legend .sw[data-b="leg"]{background-image:repeating-linear-gradient(0deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="exe"]::before,.legend .sw[data-b="exe"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="jud"]::before,.legend .sw[data-b="jud"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 7px)}
+.card[data-b="pro"]::before,.legend .sw[data-b="pro"]{background-image:radial-gradient(var(--wc) 1px,transparent 1.5px);background-size:6px 6px}
+.card[data-b="ind"]::before,.legend .sw[data-b="ind"]{background-image:repeating-linear-gradient(90deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="lok"]::before,.legend .sw[data-b="lok"]{background-image:repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 9px)}
+.card[data-b="act"]{border-style:dashed;border-top-style:solid}
+.card:hover{box-shadow:0 0 0 1px var(--wc);transform:translateY(-1px)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.c-ico{display:grid;place-items:center;padding-top:1px}
+.c-txt{display:grid;gap:1px;min-width:0}
+.c-n{font-family:var(--f-cond);font-weight:600;font-size:14.5px;line-height:1.2}
+.c-s{font-family:var(--f-cond);font-size:12.5px;color:var(--muted);line-height:1.25}
+.c-b{font-family:var(--f-mono);font-size:11px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:color-mix(in srgb,var(--alert) 12%,var(--surface));color:var(--alert);display:grid;place-items:center}
+.c-step{position:absolute;left:-1px;bottom:-1px;font-family:var(--f-mono);font-size:11.5px;background:var(--accent);color:var(--surface);padding:1px 7px;border-radius:0 6px 0 5px}
+.lanac.focus .card:not(.sel):not(.up):not(.down):not(.rel),.hier.focus .card:not(.sel):not(.up):not(.down):not(.rel),.niv.focus .card:not(.sel):not(.rel){opacity:.38}
+.card.sel{box-shadow:0 0 0 2px var(--wc);background:color-mix(in srgb,var(--wc) 9%,var(--surface))}
+.card.up,.card.down,.card.rel{box-shadow:0 0 0 1px var(--wc)}
+.soon{background:var(--surface);border:1px dashed var(--line-strong);border-radius:10px;padding:40px 32px;display:grid;gap:12px;justify-items:start;max-width:720px}
+.soon h2{font-size:26px}
+
+
+/* ---------- Prikaz: Ko je kome nadređen ---------- */
+.hier{position:relative;display:grid;gap:12px}
+.htop{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:center}
+.htop .card{width:280px}
+.hcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+.hcol{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--wc);border-radius:10px;padding:12px 12px 16px;display:grid;gap:12px;align-content:start;min-width:0}
+.hcol-h{display:grid;gap:3px}
+.hcol-h h3{font-size:17px}
+.hcol-h p{font-size:12.5px;color:var(--muted)}
+.hhead{display:grid;gap:8px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.hhead-i{display:grid;gap:4px}
+.hhead-i .lbl{font-size:10px}
+.htree,.hk{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.hk{padding-left:26px;margin-top:10px}
+.hcard{width:100%}
+.hsub-t{all:unset;cursor:pointer;font-size:12px;color:var(--accent);margin:5px 0 0 4px;display:inline-block}
+.hsub-t:hover{text-decoration:underline}
+.hsub-t:focus-visible{outline:2px solid var(--accent)}
+.hsub{list-style:none;margin:4px 0 0 6px;padding:2px 0 2px 12px;border-left:2px solid color-mix(in srgb,var(--wc) 45%,transparent);font-size:12.5px;color:var(--muted);display:grid;gap:3px}
+.hnote{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:8px;padding:10px 14px;font-size:14px}
+.eg.tree .e{stroke:var(--line-strong);stroke-width:1.4;opacity:1}
+.eg.tree.on .e{stroke:var(--accent);stroke-width:2.4}
+.eg.cross .e{stroke-dasharray:5 4}
+@media (max-width:900px){.hcols{grid-template-columns:minmax(0,1fr)}.htop{grid-template-columns:minmax(0,1fr)}.htop .card{width:100%}}
+
+
+/* ---------- Prikaz: Nivoi vlasti ---------- */
+.niv{position:relative;display:grid;gap:10px}
+.nrow{position:relative;display:grid;grid-template-columns:220px minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.nrow.on{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.nhead{background:transparent;border:0;padding:0 14px}
+.nvoters{background:transparent;border-style:dashed}
+.ncell{display:flex;flex-wrap:wrap;gap:10px;min-width:0}
+.nspan{grid-column:2/4}
+.nspan .card{width:min(100%,560px)}
+.nnote{font-size:12px;color:var(--muted);font-style:italic;margin-top:4px}
+@media (max-width:900px){.nrow{grid-template-columns:minmax(0,1fr)}.nhead{display:none}.nspan{grid-column:auto}}
+
+/* ---------- Donji deo ---------- */
+.lower{max-width:1640px;margin:36px auto 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:32px;align-items:start}
+.lower h2{font-size:22px;margin-bottom:12px}
+.gloss{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:14px}
+.gloss dt{font-family:var(--f-mono);font-weight:500;color:var(--accent)}
+.gloss dd{margin:0}
+.allbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);color:var(--text);max-width:100%}
+.alllist{display:grid;gap:18px}
+.alllist .item{padding-left:14px;border-left:3px solid var(--line)}
+footer{max-width:1640px;margin:36px auto 0;padding-block:16px 40px;font-size:13px;color:var(--muted);display:grid;gap:8px;border-top:1px solid var(--line)}
+footer p{max-width:90ch}
+
+/* Imena i institucije u tekstu */
+.ent{all:unset;cursor:pointer;color:inherit;border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent);transition:background .12s,border-color .12s}
+.ent-p{border-bottom-style:dotted}
+.ent:hover,.ent:focus-visible{background:var(--accent-soft);border-bottom-color:var(--accent)}
+.ent:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+/* Pregled na hover */
+.tip{position:fixed;z-index:60;max-width:340px;background:var(--surface);border:1px solid var(--line-strong);border-radius:8px;box-shadow:0 8px 24px rgba(10,20,40,.14),0 2px 6px rgba(10,20,40,.08);padding:11px 13px;display:grid;gap:4px;font-size:13px;pointer-events:none}
+.tip strong{font-family:var(--f-display);font-size:16px;line-height:1.2}
+.tip .tiph{display:flex;gap:8px;align-items:center}
+.tip .tipf{font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:2px}
+.tip .rel{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:baseline;font-weight:600}
+.tip .rel i{font-style:normal;color:var(--muted);font-weight:400}
+@media (hover:none){.tip{display:none}}
+
+/* ---------- Manji ekrani ---------- */
+@media (max-width:1280px){
+  .top-in{grid-template-columns:auto minmax(0,1fr) auto;}
+  .views{grid-column:1/-1;grid-row:2}
+  :root{--topbar:108px}
+}
+@media (max-width:1100px){
+  .board{grid-template-columns:minmax(0,1fr)}
+  .panel{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:35;max-height:72vh;border-radius:14px 14px 0 0;border-inline:0;border-bottom:0;box-shadow:0 -12px 32px rgba(10,20,40,.2);transform:translateY(105%);transition:transform .25s ease;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .panel.open{transform:none}
+  .p-top::before{content:"";position:absolute;left:50%;top:5px;width:36px;height:4px;border-radius:2px;background:var(--line-strong);transform:translateX(-50%)}
+  .p-top{padding-top:14px}
+  .tier{grid-template-columns:minmax(0,1fr);gap:10px}
+  .tier-h{position:static}
+  .state{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lower{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .top-in{grid-template-columns:minmax(0,1fr) auto}
+  .search{grid-column:1/-1;grid-row:2}
+  .views{grid-row:3;overflow-x:auto;max-width:100%}
+  .search kbd{display:none}
+  :root{--topbar:150px}
+  .card{width:calc(50% - 4px);grid-template-columns:minmax(0,1fr) auto}
+  .c-ico{display:none}
+  .cards{width:100%}
+  .grp{width:100%}
+  .state{grid-template-columns:minmax(0,1fr)}
+  .hier .card,.niv .card{width:100%;grid-template-columns:22px minmax(0,1fr) auto}
+  .hier .c-ico,.niv .c-ico{display:grid}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}

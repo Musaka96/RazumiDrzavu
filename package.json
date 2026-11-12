@@ -1,0 +1,11 @@
+{
+  "name": "mapa-vlasti-srbije",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Šema državne vlasti Srbije sa vestima od vanrednih izbora 2026.",
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 5178 --directory public",
+    "build": "node scripts/build.mjs"
+  }
+}
