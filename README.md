@@ -23,6 +23,7 @@ public/
     dopune.js           institucije, sajtovi i vesti dodati u verziji 3
     ljudi.js            ljudi (PEOPLE) i nazivi institucija (ALIASES) koji se prepoznaju u tekstu
     lokalno.js          pokrajina, Beograd, gradovi i opštine; zamenjuje staru zajedničku instituciju „lokalna“
+    mehanizmi.js        mehanizmi (MECH): koraci, ishodi, kontrola i vesti u kojima su korišćeni
 scripts/build.mjs       provera sintakse i pravljenje dist/artifact.html (za Claude artifakt)
 vercel.json             Vercel služi folder public/
 ```
@@ -51,6 +52,26 @@ U `public/data/vesti.js` (ili `dopune.js`) dodajte objekat:
 - Imena iz `ljudi.js` i nazivi institucija u tekstu postaju linkovi automatski.
 
 Posle izmene pokrenite `npm run build` da proverite sintaksu.
+
+## Dodavanje mehanizma
+
+Mehanizmi (hapšenje, pritvor, pomilovanje, mere REM-a…) su u `public/data/mehanizmi.js`, u nizu `MECH`. Panel mehanizma prikazuje opis, dijagram toka, ishode i vesti u kojima je korišćen; adresa je `#meh-<id>`.
+
+```js
+{id:"pritvor", n:"Pritvor i blaže mere", b:"jud", inst:["osnovni","tok"],
+ sum:"Jedna rečenica o tome šta mehanizam radi.", basis:"ZKP, čl. 188–223",
+ steps:[{a:"tuzilastva", w:"Javni tužilac", t:"Predlog za pritvor", d:"Objašnjenje koraka.", r:"do 30 dana"}],
+ ends:[["Ishod","Opis ishoda."]], checks:["Ko i kako kontroliše."], path:"krivicni",
+ ev:["Uhapšen vlasnik Alta banke"]}
+```
+
+- `b`: grana vlasti (boja panela), kao kod institucija
+- `inst`: institucije kojima je mehanizam bitan; mehanizam se prikazuje i kod svake institucije koja je akter u nekom koraku
+- `steps`: koraci dijagrama; `a` je id institucije ili `null` (akter van institucija, npr. osuđeni), `w` preciznije ime aktera, `t` naslov, `d` opis, `r` rok ili trajanje (nije obavezno; prikazuje se na spojnici pred korakom)
+- `ends`: mogući ishodi `[naslov, opis]`, na dnu dijagrama
+- `checks`: ko kontroliše primenu mehanizma
+- `path`: id šireg vodiča iz `PATHS` u `shared.js` (nije obavezno)
+- `ev`: delovi naslova vesti (bez obzira na velika i mala slova) u kojima je mehanizam korišćen; vest čiji naslov sadrži neki od njih dobija čip „Mehanizam“
 
 ## Objavljivanje na Vercel
 

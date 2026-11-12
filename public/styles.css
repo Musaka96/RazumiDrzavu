@@ -68,7 +68,7 @@ details.menu{position:relative}
 details.menu summary{list-style:none;cursor:pointer;padding:7px 12px;border:1px solid var(--line-strong);border-radius:8px;font-size:14px;background:var(--surface);user-select:none}
 details.menu summary::-webkit-details-marker{display:none}
 details.menu[open] summary{border-color:var(--accent)}
-.menu-b{position:absolute;right:0;top:calc(100% + 6px);width:290px;background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;box-shadow:0 12px 32px rgba(10,20,40,.16);padding:8px;z-index:40;display:grid;gap:2px}
+.menu-b{position:absolute;right:0;top:calc(100% + 6px);width:290px;background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;box-shadow:0 12px 32px rgba(10,20,40,.16);padding:8px;z-index:40;display:grid;gap:2px;max-height:min(76vh,680px);overflow:auto;overscroll-behavior:contain}
 .menu-b .lbl{padding:8px 8px 4px}
 .mi{all:unset;cursor:pointer;padding:7px 9px;border-radius:6px;font-size:14px}
 .mi:hover,.mi[aria-pressed="true"]{background:var(--accent-soft)}
@@ -93,9 +93,9 @@ details.menu[open] summary{border-color:var(--accent)}
 .ph{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center}
 .ph .ico{width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--wc) 13%,var(--surface))}
 .ph .ico svg,.c-ico svg,.tiph svg{fill:none;stroke:var(--wc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-inline:-4px}
-.tabs button{all:unset;cursor:pointer;padding:8px 10px;font-size:14px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
-.tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--wc,var(--accent));font-weight:500}
+.tabs{display:flex;gap:0;box-shadow:inset 0 -1px var(--line);margin-inline:-4px;overflow-x:auto;scrollbar-width:none}
+.tabs button{all:unset;cursor:pointer;flex:none;padding:8px 6px 9px;font-size:13.5px;white-space:nowrap;color:var(--muted)}
+.tabs button[aria-selected="true"]{color:var(--text);box-shadow:inset 0 -2px var(--wc,var(--accent));font-weight:500}
 .tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .tc{font-family:var(--f-mono);font-size:11px;color:var(--muted);background:var(--surface-2);border-radius:9px;padding:0 6px;margin-left:2px}
 .p-body dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:13.5px}
@@ -138,8 +138,73 @@ details.menu[open] summary{border-color:var(--accent)}
 .item .t{font-weight:600;font-size:14.5px;line-height:1.35}
 .item .x{font-size:13.5px}
 .item .meta{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:12.5px;align-items:baseline}
-.item .src a{margin-right:9px;white-space:nowrap}
+.item .src a{margin-right:5px;white-space:nowrap}
 .unc{font-family:var(--f-mono);font-size:10.5px;color:var(--alert);text-transform:uppercase;letter-spacing:.06em;border:1px solid currentColor;border-radius:3px;padding:0 4px}
+.item .mhrow{gap:4px 6px;align-items:center}
+.item .mhrow .muted{margin-right:2px}
+
+/* ---------- Mehanizmi ---------- */
+.mhk{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:5px;max-width:100%;font-size:12.5px;line-height:1.3;padding:2px 8px 2px 6px;border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));border-radius:4px;background:var(--surface-2);color:var(--text)}
+.mhk svg{flex:none;width:11px;height:11px;fill:none;stroke:var(--accent);stroke-width:1.3;stroke-linejoin:round}
+.mhk:hover,.mhk:focus-visible{border-color:var(--accent);background:var(--accent-soft)}
+.mhk:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.mhks{display:flex;flex-wrap:wrap;gap:6px}
+.mlead{font-size:15px}
+.mbasis{font-size:12.5px;color:var(--muted);margin-top:-6px}
+.mbasis span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.mchk{margin:0;padding-left:18px;display:grid;gap:5px;font-size:13.5px}
+.mchk li::marker{color:var(--muted)}
+.mnote{font-size:12px;font-style:italic;border-top:1px solid var(--line);padding-top:10px}
+.ml{list-style:none;margin:0;padding:0;display:grid}
+.ml li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+.ml li:first-child{border-top:0;padding-top:0}
+.mlt{display:grid;gap:2px;font-size:14px}
+.mlt .muted{font-size:12.5px;line-height:1.45}
+.mlu{display:grid;justify-items:end;gap:3px;text-align:right;font-size:12px}
+.mlu .muted{font-size:12px}
+.mlb{font-family:var(--f-mono);font-size:11px;white-space:nowrap;padding:1px 7px;border-radius:9px;background:var(--accent-soft);color:var(--accent)}
+@media (max-width:420px){.ml li{grid-template-columns:minmax(0,1fr)}.mlu{display:flex;gap:6px;align-items:baseline;justify-content:flex-start;text-align:left}}
+
+/* Dijagram toka: --fx je vodoravni položaj spojnica (sredina kružića sa brojem) */
+.flow{container-type:inline-size;--fx:26px;min-width:0}
+.fsteps{list-style:none;margin:0;padding:0;display:grid}
+.fsteps li{min-width:0}
+.fbox{position:relative;display:grid;gap:3px;min-width:0;padding:9px 12px 11px 44px;border:1px solid var(--line);border-left:4px solid var(--wc);border-radius:6px;background:color-mix(in srgb,var(--wc) 4%,var(--surface))}
+.fn{position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--wc);color:var(--surface);display:grid;place-items:center;font-family:var(--f-mono);font-size:11.5px;font-weight:500;line-height:1}
+.fa{display:flex;align-items:center;gap:8px;min-height:22px;min-width:0}
+.fwho{all:unset;display:inline-flex;align-items:center;gap:6px;min-width:0;font-family:var(--f-cond);font-weight:600;font-size:13px;line-height:1.2;color:var(--wc)}
+button.fwho{cursor:pointer}
+button.fwho:hover span{text-decoration:underline;text-underline-offset:3px}
+button.fwho:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.fwho svg{flex:none;fill:none;stroke:var(--wc);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fsw{flex:none;margin-left:auto;width:18px;height:12px;border:1px solid var(--wc);border-top:3px solid var(--wc);border-radius:2px;background-color:var(--surface)}
+.fsw[data-b="act"]{border-style:dashed;border-top-style:solid}
+.ft{font-weight:600;font-size:14.5px;line-height:1.3}
+.fd{font-size:13.5px}
+.fr{justify-self:start;font-family:var(--f-mono);font-size:11px;line-height:1.35;padding:2px 8px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--muted)}
+.fbox .fr{margin-top:5px}
+/* Spojnica: linija sa strelicom; rok (r) sledećeg koraka stoji pored linije */
+.fc{position:relative;min-height:30px;display:flex;align-items:center;padding:6px 0 10px calc(var(--fx) + 14px)}
+.fc::before{content:"";position:absolute;left:calc(var(--fx) - .75px);top:0;bottom:5px;width:1.5px;background:var(--line-strong)}
+.fc::after{content:"";position:absolute;left:calc(var(--fx) - 4.5px);bottom:0;border:4.5px solid transparent;border-bottom:0;border-top:6px solid var(--line-strong)}
+.fc .fr{max-width:100%}
+/* Račvanje u ishode: uska kolona = stablo levo, šira = dve kolone */
+.fk{padding-bottom:6px}
+.fk::before{bottom:0}
+.fk::after{display:none}
+.fends{list-style:none;margin:0;padding:0 0 0 calc(var(--fx) + 14px);display:grid;gap:8px}
+.fend{position:relative;display:grid;gap:2px;min-width:0;padding:8px 12px 9px;border:1px dashed var(--line-strong);border-radius:6px;font-size:13px}
+.fend strong{font-size:14px}
+.fend span{color:var(--muted)}
+.fend::before{content:"";position:absolute;left:-15.75px;top:-10px;width:15px;height:29px;border-left:1.5px solid var(--line-strong);border-bottom:1.5px solid var(--line-strong);border-bottom-left-radius:6px}
+.fend:not(:last-child)::after{content:"";position:absolute;left:-15.75px;top:0;bottom:-10px;border-left:1.5px solid var(--line-strong)}
+@container (min-width:340px){
+  .fends.n2{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px 0 0;position:relative}
+  .fends.n2::before{content:"";position:absolute;top:0;left:calc(var(--fx) - .75px);width:calc(50% + 5px);border-top:1.5px solid var(--line-strong)}
+  .fends.n2 .fend::before{left:calc(var(--fx) - 1.75px);top:-15px;width:0;height:10px;border-bottom:0;border-radius:0}
+  .fends.n2 .fend::after{content:"";position:absolute;left:calc(var(--fx) - 5.5px);top:-7px;bottom:auto;border:4.5px solid transparent;border-bottom:0;border-top:6px solid var(--line-strong)}
+  .fends.n2 .fend:nth-child(n+3)::before,.fends.n2 .fend:nth-child(n+3)::after{display:none}
+}
 
 /* Legenda: boja + šrafura */
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted)}
@@ -169,12 +234,12 @@ details.menu[open] summary{border-color:var(--accent)}
 .cards{display:flex;flex-wrap:wrap;gap:8px}
 .card{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:start;width:190px;min-height:62px;padding:10px 10px 9px;border:1px solid var(--line-strong);border-top:3px solid var(--wc);border-radius:6px;background:var(--surface);transition:opacity .15s,box-shadow .15s,transform .15s;z-index:1;overflow:hidden}
 .card::before{content:"";position:absolute;inset:0;opacity:.13;pointer-events:none}
-.card[data-b="leg"]::before,.legend .sw[data-b="leg"]{background-image:repeating-linear-gradient(0deg,var(--wc) 0 1px,transparent 1px 6px)}
-.card[data-b="exe"]::before,.legend .sw[data-b="exe"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 6px)}
-.card[data-b="jud"]::before,.legend .sw[data-b="jud"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 7px)}
-.card[data-b="pro"]::before,.legend .sw[data-b="pro"]{background-image:radial-gradient(var(--wc) 1px,transparent 1.5px);background-size:6px 6px}
-.card[data-b="ind"]::before,.legend .sw[data-b="ind"]{background-image:repeating-linear-gradient(90deg,var(--wc) 0 1px,transparent 1px 6px)}
-.card[data-b="lok"]::before,.legend .sw[data-b="lok"]{background-image:repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 9px)}
+.card[data-b="leg"]::before,.legend .sw[data-b="leg"],.fsw[data-b="leg"]{background-image:repeating-linear-gradient(0deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="exe"]::before,.legend .sw[data-b="exe"],.fsw[data-b="exe"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="jud"]::before,.legend .sw[data-b="jud"],.fsw[data-b="jud"]{background-image:repeating-linear-gradient(45deg,var(--wc) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 7px)}
+.card[data-b="pro"]::before,.legend .sw[data-b="pro"],.fsw[data-b="pro"]{background-image:radial-gradient(var(--wc) 1px,transparent 1.5px);background-size:6px 6px}
+.card[data-b="ind"]::before,.legend .sw[data-b="ind"],.fsw[data-b="ind"]{background-image:repeating-linear-gradient(90deg,var(--wc) 0 1px,transparent 1px 6px)}
+.card[data-b="lok"]::before,.legend .sw[data-b="lok"],.fsw[data-b="lok"]{background-image:repeating-linear-gradient(-45deg,var(--wc) 0 1px,transparent 1px 9px)}
 .card[data-b="act"]{border-style:dashed;border-top-style:solid}
 .card:hover{box-shadow:0 0 0 1px var(--wc);transform:translateY(-1px)}
 .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}

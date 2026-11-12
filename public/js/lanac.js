@@ -8,7 +8,7 @@ const LEGIT=[
  ["studenti","skupstina","osvojila 140 mandata"],["sns","skupstina","osvojila 103 mandata"],
  ["skupstina","vlada","bira Vladu"],["skupstina","ustavni","bira 5 sudija"],["predsednik","ustavni","imenuje 5 sudija"],
  ["skupstina","vjt","bira Vrhovnog javnog tužioca"],["skupstina","vss","bira 4 člana"],["skupstina","vst","bira 4 člana"],
- ["skupstina","vrhovni","bira predsednika suda"],["skupstina","rik","bira stalni sastav"],["skupstina","nbs","bira guvernera"],
+["skupstina","rik","bira stalni sastav"],["skupstina","nbs","bira guvernera"],
  ["skupstina","rem","bira Savet"],["skupstina","acas","bira Odbor agencije"],["skupstina","ombudsman","bira"],["skupstina","poverenik","bira"],
  ["skupstina","ravnopravnost","bira"],["skupstina","dri","bira Savet"],
  ["vlada","minpravde","ministar je član Vlade"],["vlada","mup","ministar je član Vlade; postavlja direktora policije"],["vlada","bia","postavlja direktora"],
@@ -31,7 +31,7 @@ const LEGIT_INFO={
  "skupstina>poverenik":"Skupština bira Poverenika za informacije na sedam godina; od jula 2026. funkciju vrši zamenica.",
  "skupstina>ravnopravnost":"Skupština bira Poverenika za zaštitu ravnopravnosti na pet godina.",
  "skupstina>dri":"Skupština bira Savet Državne revizorske institucije.",
- "vss>vrhovni":"Sudije Vrhovnog suda bira Visoki savet sudstva; predsednika suda bira Skupština na predlog VSS.",
+ "vss>vrhovni":"Visoki savet sudstva bira sudije Vrhovnog suda i, od 2022, njegovog predsednika.",
  "vst>tuzrz":"VST bira tužioce za ratne zločine i postavlja vršioca funkcije glavnog tužioca dok se ne izabere novi."
 };
 const TIER_INFO=[
@@ -88,9 +88,9 @@ const Lanac={
       legitDown(id).forEach(([,b])=>r.down.add(b));
       LEGIT.forEach(e=>{const[a,b]=e;if((r.up.has(a)||a===id)&&(r.up.has(b)||b===id))r.edges.push({e,k:"up"});else if(a===id)r.edges.push({e,k:"down"})});
       if(mode.t==="person")evForPerson(mode.id).forEach(e=>e.i.forEach(i=>{if(i!==id)r.rel.add(i)}));
-    }else if(mode.t==="path"){
-      const P=PATHS.find(p=>p.id===mode.id);
-      P.steps.forEach((s,i)=>{r.rel.add(s[0]);(r.steps[s[0]]=r.steps[s[0]]||[]).push(i+1);if(i)r.edges.push({e:[P.steps[i-1][0],s[0],s[1]],k:"route"})});
+    }else if(mode.t==="path"||mode.t==="meh"){
+      const G=guideSteps(mode);
+      G.forEach((s,i)=>{r.rel.add(s[0]);(r.steps[s[0]]=r.steps[s[0]]||[]).push(s[2]);if(i)r.edges.push({e:[G[i-1][0],s[0],s[1]],k:"route"})});
     }else if(mode.t==="case"){
       EV.filter(e=>e.k.includes(mode.id)&&inScope(e)).forEach(e=>e.i.forEach(i=>r.rel.add(i)));
     }

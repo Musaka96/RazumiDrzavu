@@ -32,13 +32,21 @@ function showRelTip(a,b,v,x,y){
   tip.innerHTML=`<span class="lbl">Odnos</span><span class="rel">${esc(INST[a].p)} <i>→ ${esc(v)} →</i> ${esc(INST[b].p)}</span>${info?`<span>${esc(info)}</span>`:""}`;
   tip.hidden=false;applyScript(tip);placeTip(x+14,y+14);
 }
-document.addEventListener("mouseover",e=>{const el=e.target.closest(".ent");if(el)showEntTip(el)});
-document.addEventListener("mouseout",e=>{if(e.target.closest(".ent"))hideTip()});
-document.addEventListener("focusin",e=>{const el=e.target.closest(".ent");if(el)showEntTip(el)});
+function showMhTip(el){
+  const m=MBY[el.dataset.meh],n=mechEv(m.id).filter(inScope).length;
+  tip.innerHTML=`<span class="lbl">Mehanizam · ${esc(BR[m.b].n)}</span><strong>${esc(m.n)}</strong><span class="muted">${esc(m.sum)}</span><span class="tipf">${n} vesti · klik za dijagram</span>`;
+  tip.hidden=false;applyScript(tip);
+  const r=el.getBoundingClientRect();placeTip(r.left,r.bottom+8);
+}
+const tipOf=el=>{const t=el.closest(".ent,.mhk");if(t)t.classList.contains("mhk")?showMhTip(t):showEntTip(t)};
+document.addEventListener("mouseover",e=>tipOf(e.target));
+document.addEventListener("mouseout",e=>{if(e.target.closest(".ent,.mhk"))hideTip()});
+document.addEventListener("focusin",e=>tipOf(e.target));
 window.addEventListener("scroll",hideTip,{passive:true});
 
-/* Klikovi na imena i institucije bilo gde na stranici */
+/* Klikovi na mehanizme, imena i institucije bilo gde na stranici */
 document.addEventListener("click",e=>{
+  const mh=e.target.closest("[data-meh]");if(mh){hideTip();openMech(mh.dataset.meh,true);return}
   const ent=e.target.closest(".ent");
   if(ent){hideTip();const k=ent.dataset.ent;k[0]==="p"?openPerson(k.slice(2),true):openRoom(k.slice(2),true);return}
   const rm=e.target.closest("[data-room]");if(rm){openRoom(rm.dataset.room,true);return}
@@ -47,9 +55,10 @@ document.addEventListener("click",e=>{
 
 /* ---------- Navigacija ---------- */
 function setMode(m,push){
-  if(m&&m.t==="room"&&!INST[m.id])m=null;if(m&&m.t==="person"&&!PBY[m.id])m=null;
+  if(m&&m.t==="room"&&!INST[m.id])m=null;if(m&&m.t==="person"&&!PBY[m.id])m=null;if(m&&m.t==="meh"&&!MBY[m.id])m=null;
   if(push&&mode&&!(m&&m.t===mode.t&&m.id===mode.id))history_.push(mode);
   if(!m)history_=[];
+  if(!(m&&mode&&m.t===mode.t&&m.id===mode.id))$("#panel").scrollTop=0;
   mode=m;
   syncMenus();
   VIEWS[view].impl&&VIEWS[view].impl.update();
@@ -59,6 +68,7 @@ function setMode(m,push){
 }
 const openRoom=(id,push,tab)=>{setMode({t:"room",id,tab:tab||"pregled"},push);revealSelection()};
 const openPerson=(id,push)=>{setMode({t:"person",id,tab:"pregled"},push);revealSelection()};
+const openMech=(id,push)=>{setMode({t:"meh",id},push);$("#panel").scrollTop=0};
 function goBack(){const m=history_.pop();setMode(m||null,false);revealSelection()}
 function revealSelection(){
   const id=mode&&(mode.t==="room"?mode.id:mode.t==="person"?PBY[mode.id].room:null);
@@ -83,6 +93,20 @@ function relRow(r,id){
   const a=r.out?id:r.o,b=r.out?r.o:id,k=a+">"+b,info=LINK_INFO[k]||LEGIT_INFO[k]||LEVEL_INFO[k]||HIER_INFO[k]||HIER_CROSS_INFO[k];
   return `<li><div class="rr">${r.out?`<span class="rv">${esc(r.v)}</span> → <button class="lk" data-room="${r.o}">${esc(INST[r.o].p)}</button>`:`<button class="lk" data-room="${r.o}">${esc(INST[r.o].p)}</button> → <span class="rv">${esc(r.v)}</span>`}</div>${info?`<div class="ri">${linkify(esc(info))}</div>`:""}</li>`;
 }
+/* Mehanizmi institucije: prvo nedavno korišćeni (po datumu poslednje vesti), pa ostali po azbučnom redu */
+const mechOf=id=>mechFor(id).map(m=>{const ev=mechUsed(m.id);return{m,ev,last:ev.length?ev[0].d:null}})
+  .sort((a,b)=>a.last&&b.last?b.last.localeCompare(a.last):a.last?-1:b.last?1:a.m.n.localeCompare(b.m.n,"sr"));
+/* Dijagram toka: koraci odozgo nadole, rokovi na spojnicama, na kraju račvanje u moguće ishode */
+function flowHtml(M){
+  const pill=r=>`<span class="fr">${esc(r)}</span>`;
+  const step=(s,i)=>{const b=s.a?INST[s.a].b:"act",who=s.w||(s.a?INST[s.a].p:"");
+    return `<li style="--wc:${bc(b)}">${i?`<div class="fc">${s.r?pill(s.r):""}</div>`:""}<div class="fbox"><span class="fn" aria-hidden="true">${i+1}</span>
+      <div class="fa">${s.a?`<button class="fwho" data-room="${s.a}">${icoSvg(s.a,16)}<span>${esc(who)}</span></button>`:`<span class="fwho">${esc(who)}</span>`}<i class="fsw" data-b="${b}" title="${esc(BR[b].n)}"></i></div>
+      <div class="ft">${linkify(esc(s.t))}</div><div class="fd">${linkify(esc(s.d))}</div>${!i&&s.r?pill(s.r):""}</div></li>`};
+  return `<div class="flow"><ol class="fsteps">${M.steps.map(step).join("")}</ol>
+    ${M.ends.length?`<div class="fc fk"><span class="lbl">Mogući ishodi</span></div>
+    <ul class="fends${M.ends.length>1?" n2":""}">${M.ends.map(([t,d])=>`<li class="fend"><strong>${linkify(esc(t))}</strong><span>${linkify(esc(d))}</span></li>`).join("")}</ul>`:""}</div>`;
+}
 function renderPanel(){
   const p=$("#panel");let h="",wc="var(--accent)";
   const top=`<div class="p-top">${history_.length?`<button class="pbtn" data-back="1"><span aria-hidden="true">←</span> Nazad</button>`:"<span></span>"}${mode?`<button class="pbtn" data-close="1" aria-label="Zatvori panel">Zatvori</button>`:""}</div>`;
@@ -93,21 +117,27 @@ function renderPanel(){
     <div class="sec"><span class="lbl">Za početak</span><div class="starts">
       <button class="start" data-room="skupstina"><strong>Narodna skupština</strong><span>Šta zavisi od nove većine</span></button>
       <button class="start" data-room="tok"><strong>Tužilaštvo za organizovani kriminal</strong><span>Najviše vesti posle izbora</span></button>
-      <button class="start" data-guide="path:vlada-nastaje"><strong>Kako nastaje Vlada</strong><span>Vodič korak po korak</span></button></div></div>`;
+      <button class="start" data-guide="path:vlada-nastaje"><strong>Kako nastaje Vlada</strong><span>Vodič korak po korak</span></button>
+      <button class="start" data-guide="meh:zadrzavanje"><strong>Šta se dešava kad je neko uhapšen</strong><span>Mehanizam sa dijagramom</span></button></div></div>`;
   }else if(mode.t==="room"){
     const id=mode.id,it=INST[id],rels=relsOf(id),evs=evFor(id),ppl=peopleIn(id),tab=mode.tab||"pregled";wc=bc(it.b);
-    const chain=chainToVoters(id);
+    const chain=chainToVoters(id),mechs=mechOf(id);
     h=`<div class="ph"><div class="ico">${icoSvg(id,26)}</div><div><span class="lbl">${esc(BR[it.b].n)}</span><h2>${esc(it.n)}</h2></div></div>`;
-    h+=tabsHtml([["pregled","Pregled"],["veze","Veze",rels.length],["vesti","Vesti",evs.length],["ljudi","Ljudi",ppl.length]],tab);
+    h+=tabsHtml([["pregled","Pregled"],["veze","Veze",rels.length],["mehanizmi","Mehanizmi",mechs.length],["vesti","Vesti",evs.length],["ljudi","Ljudi",ppl.length]],tab);
     if(tab==="pregled"){
+      const recent=mechs.map(x=>({m:x.m,d:(x.ev.find(inScope)||{}).d})).filter(x=>x.d).sort((a,b)=>b.d.localeCompare(a.d));
       h+=`<p>${linkify(esc(it.role),"i:"+id)}</p>
       <dl><dt>Sada</dt><dd>${linkify(esc(it.head),"i:"+id)}</dd><dt>Bira ga</dt><dd>${esc(it.chosen)}</dd><dt>Mandat</dt><dd>${esc(it.term)}</dd>${it.web?`<dt>Sajt</dt><dd><a href="${esc(it.web)}" target="_blank" rel="noopener">zvanični sajt ↗</a></dd>`:""}</dl>
       ${chain&&chain.length>1?`<div class="sec"><span class="lbl">Put do birača</span><ol class="chain">${chain.map(c=>`<li>${c===id?`<strong>${esc(INST[c].p)}</strong>`:`<button class="lk" data-room="${c}">${esc(INST[c].p)}</button>`}</li>`).join("")}</ol></div>`:""}
+      ${recent.length?`<div class="sec"><span class="lbl">Nedavno korišćeni mehanizmi</span><div class="mhks">${recent.slice(0,4).map(x=>mhChip(x.m.id)).join("")}</div><button class="lk" data-tab="mehanizmi">Svi mehanizmi (${mechs.length})</button></div>`:""}
       ${evs.length?`<div class="sec"><span class="lbl">Najnovije</span>${evs.slice(0,2).map(e=>itemHtml(e,id)).join("")}${evs.length>2?`<button class="lk" data-tab="vesti">Sve vesti (${evs.length})</button>`:""}</div>`:""}`;
     }else if(tab==="veze"){
       const out=rels.filter(r=>r.out),inn=rels.filter(r=>!r.out);
       h+=`${out.length?`<div class="sec0"><span class="lbl">Šta ova institucija radi drugima</span><ul class="rl">${out.map(r=>relRow(r,id)).join("")}</ul></div>`:""}
       ${inn.length?`<div class="sec"><span class="lbl">Šta drugi rade njoj</span><ul class="rl">${inn.map(r=>relRow(r,id)).join("")}</ul></div>`:""}`;
+    }else if(tab==="mehanizmi"){
+      h+=mechs.length?`<p class="muted">Ovlašćenja i postupci u kojima ova institucija učestvuje; nedavno korišćeni su na vrhu.</p><ul class="ml">${mechs.map(({m,ev,last})=>`<li><div class="mlt"><button class="lk" data-meh="${m.id}">${esc(m.n)}</button><span class="muted">${esc(m.sum)}</span></div>
+        <div class="mlu">${last?`<span class="mlb">korišćen ${fmt(last)}</span><span class="muted">${ev.length} vesti</span>`:`<span class="muted">nije korišćen</span>`}</div></li>`).join("")}</ul>`:`<p class="muted">Za ovu instituciju nema opisanih mehanizama.</p>`;
     }else if(tab==="vesti"){
       h+=`<div class="vbar">${periodSeg()}</div>${newsList(evs,id)}`;
     }else if(tab==="ljudi"){
@@ -123,6 +153,13 @@ function renderPanel(){
   }else if(mode.t==="path"){
     const P=PATHS.find(x=>x.id===mode.id);
     h=`<span class="lbl">Vodič</span><h2>${esc(P.n)}</h2><ol class="steps">${P.steps.map(s=>`<li><div><div class="st">${esc(s[1])} · <button class="lk" data-room="${s[0]}">${esc(INST[s[0]].p)}</button></div><div class="sd">${linkify(esc(s[2]))}</div>${s[3]?`<div class="now">${esc(s[3])}</div>`:""}</div></li>`).join("")}</ol>`;
+  }else if(mode.t==="meh"){
+    const M=MBY[mode.id],all=mechEv(M.id),evs=all.filter(inScope),P=M.path&&PATHS.find(x=>x.id===M.path);wc=bc(M.b);
+    h=`<span class="lbl">Mehanizam</span><h2>${esc(M.n)}</h2><p class="mlead">${linkify(esc(M.sum))}</p><p class="mbasis"><span>Pravni osnov:</span> ${linkify(esc(M.basis))}</p>
+    ${flowHtml(M)}
+    <div class="sec"><span class="lbl">Ko kontroliše</span><ul class="mchk">${M.checks.map(c=>`<li>${linkify(esc(c))}</li>`).join("")}</ul>${P?`<button class="lk" data-guide="path:${P.id}">Širi vodič: ${esc(P.n)}</button>`:""}</div>
+    <div class="sec"><span class="lbl">Korišćen u vestima</span>${all.length?`<div class="vbar">${periodSeg()}</div>${newsList(evs,"m:"+M.id)}`:`<p class="muted">Nije korišćen od novembra 2024.</p>`}</div>
+    <p class="muted mnote">Pojednostavljen prikaz; merodavan je tekst zakona.</p>`;
   }else if(mode.t==="case"){
     const C=CASES.find(x=>x.id===mode.id),evs=EV.filter(e=>e.k.includes(C.id)&&inScope(e)).sort((a,b)=>b.d.localeCompare(a.d));
     h=`<span class="lbl">Slučaj</span><h2>${esc(C.n)}</h2><p class="muted">Na prikazu su istaknute institucije kroz koje je slučaj prošao.</p><div class="vbar">${periodSeg()}</div>${newsList(evs,null)}`;
@@ -159,6 +196,7 @@ const norm=s=>s.toLowerCase().replace(/đ/g,"dj").normalize("NFD").replace(/[̀-
 const SIDX=[
   ...Object.keys(INST).map(id=>({k:"i",id,l:INST[id].n,s:BR[INST[id].b].n,h:norm(INST[id].n+" "+INST[id].p+" "+INST[id].head)})),
   ...PEOPLE.map(p=>({k:"p",id:p.id,l:p.n,s:p.role,h:norm(p.n)})),
+  ...MECH.map(m=>({k:"m",id:m.id,l:m.n,s:"Mehanizam · "+BR[m.b].n,h:norm(m.n+" "+m.sum)})),
   ...EV.map((e,i)=>({k:"e",id:i,l:e.t,s:fmt(e.d),h:norm(e.t+" "+e.x),d:e.d}))
 ];
 let qSel=0,qHits=[];
@@ -166,17 +204,17 @@ function runSearch(q){
   const box=$("#qres"),n=norm(q.trim());
   if(n.length<2){box.hidden=true;qHits=[];return}
   const words=n.split(/\s+/),match=x=>words.every(w=>x.h.includes(w));
-  const I=SIDX.filter(x=>x.k==="i"&&match(x)).slice(0,5),P=SIDX.filter(x=>x.k==="p"&&match(x)).slice(0,5),E=SIDX.filter(x=>x.k==="e"&&match(x)).sort((a,b)=>b.d.localeCompare(a.d)).slice(0,6);
-  qHits=[...I,...P,...E];qSel=0;
+  const I=SIDX.filter(x=>x.k==="i"&&match(x)).slice(0,5),P=SIDX.filter(x=>x.k==="p"&&match(x)).slice(0,5),M=SIDX.filter(x=>x.k==="m"&&match(x)).slice(0,4),E=SIDX.filter(x=>x.k==="e"&&match(x)).sort((a,b)=>b.d.localeCompare(a.d)).slice(0,6);
+  qHits=[...I,...P,...M,...E];qSel=0;
   const grp=(n,a)=>a.length?`<div class="qg">${n}</div>`+a.map(x=>`<button class="qi" role="option" data-qi="${qHits.indexOf(x)}"><span class="ql">${esc(x.l)}</span><span class="qs">${esc(x.s)}</span></button>`).join(""):"";
-  box.innerHTML=qHits.length?grp("Institucije",I)+grp("Ljudi",P)+grp("Vesti",E):`<div class="qe">Nema rezultata za „${esc(q)}“.</div>`;
+  box.innerHTML=qHits.length?grp("Institucije",I)+grp("Ljudi",P)+grp("Mehanizmi",M)+grp("Vesti",E):`<div class="qe">Nema rezultata za „${esc(q)}“.</div>`;
   box.hidden=false;markQ();applyScript(box);
   box.querySelectorAll("[data-qi]").forEach(b=>b.addEventListener("mousedown",ev=>{ev.preventDefault();pickQ(+b.dataset.qi)}));
 }
 function markQ(){document.querySelectorAll("#qres .qi").forEach(b=>b.classList.toggle("on",+b.dataset.qi===qSel))}
 function pickQ(i){
   const x=qHits[i];if(!x)return;$("#q").value="";$("#qres").hidden=true;$("#q").blur();
-  if(x.k==="i")openRoom(x.id,true);else if(x.k==="p")openPerson(x.id,true);
+  if(x.k==="i")openRoom(x.id,true);else if(x.k==="p")openPerson(x.id,true);else if(x.k==="m")openMech(x.id,true);
   else{const e=EV[x.id];if(e.p==="bg"&&period!=="sve")setPeriod("sve");openRoom(e.i[0],true,"vesti");
     requestAnimationFrame(()=>{const el=document.querySelector(`#panel [data-ev="${x.id}"]`);if(el){el.classList.add("flash");el.scrollIntoView({block:"center"})}})}
 }
@@ -193,13 +231,16 @@ function renderAll(){
 /* ---------- Pokretanje ---------- */
 function parseHash(){
   const h=decodeURIComponent(location.hash.slice(1));let m=null;
-  if(INST[h])m={t:"room",id:h};else if(h.startsWith("path-"))m={t:"path",id:h.slice(5)};else if(h.startsWith("case-"))m={t:"case",id:h.slice(5)};else if(h.startsWith("osoba-"))m={t:"person",id:h.slice(6)};
-  if(m&&m.t==="path"&&!PATHS.some(p=>p.id===m.id))m=null;if(m&&m.t==="case"&&!CASES.some(c=>c.id===m.id))m=null;
+  if(INST[h])m={t:"room",id:h};else if(h.startsWith("path-"))m={t:"path",id:h.slice(5)};else if(h.startsWith("case-"))m={t:"case",id:h.slice(5)};else if(h.startsWith("osoba-"))m={t:"person",id:h.slice(6)};else if(h.startsWith("meh-"))m={t:"meh",id:h.slice(4)};
+  if(m&&m.t==="path"&&!PATHS.some(p=>p.id===m.id))m=null;if(m&&m.t==="meh"&&!MBY[m.id])m=null;if(m&&m.t==="case"&&!CASES.some(c=>c.id===m.id))m=null;
   return m;
 }
 function init(){
   $("#guides-paths").innerHTML=PATHS.map(p=>`<button class="mi" data-guide="path:${p.id}">${esc(p.n)}</button>`).join("");
   $("#guides-cases").innerHTML=CASES.map(c=>`<button class="mi" data-guide="case:${c.id}">${esc(c.n)}</button>`).join("");
+  /* Mehanizmi: prvo korišćeni (najnovija vest), zatim ostali po azbučnom redu */
+  const ml=m=>(mechUsed(m.id)[0]||{}).d;
+  $("#guides-mechs").innerHTML=[...MECH].sort((a,b)=>{const x=ml(a),y=ml(b);return x&&y?y.localeCompare(x):x?-1:y?1:a.n.localeCompare(b.n,"sr")}).map(m=>`<button class="mi" data-guide="meh:${m.id}">${esc(m.n)}</button>`).join("");
   document.querySelectorAll(".menu [data-guide]").forEach(b=>b.addEventListener("click",()=>openGuide(b.dataset.guide)));
   document.querySelector("[data-home]").addEventListener("click",e=>{e.preventDefault();setMode(null);window.scrollTo({top:0})});
   document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));

@@ -99,6 +99,17 @@ const CASES=[
 ];
 EV.forEach(e=>{const t=e.t.toLowerCase();e.k=CASES.filter(c=>c.m.some(m=>t.includes(m))).map(c=>c.id)});
 
+/* Koraci vodiča ili mehanizma za isticanje na prikazu: [[id institucije, opis, broj koraka],...].
+   Kod mehanizma se preskaču koraci bez institucije, a uzastopni koraci iste institucije spajaju („2–4“). */
+function guideSteps(m){
+  if(!m)return[];
+  if(m.t==="path"){const P=PATHS.find(p=>p.id===m.id);return P?P.steps.map((s,i)=>[s[0],s[1],String(i+1)]):[]}
+  if(m.t!=="meh"||!MBY[m.id])return[];
+  const o=[];MBY[m.id].steps.forEach((s,i)=>{if(!s.a)return;const l=o[o.length-1];
+    if(l&&l[0]===s.a&&l.last===i-1){l[2]=l[2].split("–")[0]+"–"+(i+1);l.last=i}else{const x=[s.a,s.t,String(i+1)];x.last=i;o.push(x)}});
+  return o;
+}
+
 /* ---------- Skraćenice ---------- */
 const GLOSS=[["BIA","Bezbednosno-informativna agencija"],["VBA","Vojnobezbednosna agencija"],["VSS","Visoki savet sudstva"],["VST","Visoki savet tužilaštva"],["VJT","Vrhovno javno tužilaštvo; u vestima i Više javno tužilaštvo"],["TOK","Tužilaštvo za organizovani kriminal"],["VTK","Visokotehnološki kriminal"],["RIK","Republička izborna komisija"],["REM","Regulatorno telo za elektronske medije"],["UKP","Uprava kriminalističke policije"],["SAJ","Specijalna antiteroristička jedinica"],["DRI","Državna revizorska institucija"],["NBS","Narodna banka Srbije"],["APV","Autonomna pokrajina Vojvodina"],["ODIHR","Kancelarija OEBS-a za demokratske institucije i ljudska prava"],["CRTA, CeSID","Domaće posmatračke organizacije"]];
 
@@ -155,8 +166,7 @@ const LINK_INFO={
  "skupstina>vst":"Skupština bira 4 istaknuta pravnika u Visoki savet tužilaštva, kvalifikovanom većinom.",
  "skupstina>vjt":"Skupština bira Vrhovnog javnog tužioca na šest godina, na predlog Visokog saveta tužilaštva.",
  "vst>vjt":"VST sprovodi konkurs i predlaže Skupštini kandidata za Vrhovnog javnog tužioca.",
- "vss>vrhovni":"VSS predlaže Skupštini kandidata za predsednika Vrhovnog suda.",
- "skupstina>vrhovni":"Skupština bira predsednika Vrhovnog suda, na predlog VSS.",
+ "vss>vrhovni":"VSS bira predsednika Vrhovnog suda, po mišljenju opšte sednice tog suda; Skupština od 2022. više ne učestvuje.",
  "vss>apelacioni":"Sudije i predsednike sudova bira Visoki savet sudstva; od 2022. to više ne radi Skupština.",
  "vss>upravni":"Sudije i predsednike sudova bira Visoki savet sudstva.",
  "vss>osnovni":"Sudije i predsednike sudova bira Visoki savet sudstva; on odlučuje i o napredovanju i disciplini sudija.",
@@ -189,13 +199,16 @@ const LINK_INFO={
  "eu>vst":"Evropska komisija i Venecijanska komisija ocenjuju samostalnost tužilaštva."
 };
 
-const srcHtml=e=>e.s.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join("");
+const srcHtml=e=>e.s.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(" ");
+/* Dugme-čip za mehanizam (u vestima i panelu) */
+const mhChip=id=>`<button class="mhk" data-meh="${id}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5h4v3h-4zM6.5 7.5h4v3h-4zM3.5 4.5v4.5h3"/></svg>${esc(MBY[id].n)}</button>`;
 function itemHtml(e,skip){
-  const others=e.i.filter(x=>x!==skip&&"i:"+x!==skip);
+  const others=e.i.filter(x=>x!==skip&&"i:"+x!==skip),mh=(e.mh||[]).filter(m=>"m:"+m!==skip);
   return `<article class="item" data-ev="${EV.indexOf(e)}">
    <time datetime="${e.d}">${fmt(e.d)}${e.p==="fu"?" · predstoji":e.p==="bg"?" · pozadina":""}</time>
    <span class="t">${esc(e.t)}</span><p class="x">${linkify(esc(e.x),skip&&(skip.includes(":")?skip:"i:"+skip))}</p>
    <div class="meta">${e.u?`<span class="unc">nepotvrđeno</span>`:""}<span class="src">Izvori: ${srcHtml(e)}</span></div>
    ${others.length?`<div class="meta"><span class="muted">Institucije:</span>${others.map(o=>`<button class="lk" data-room="${o}">${esc(INST[o].p)}</button>`).join("")}</div>`:""}
+   ${mh.length?`<div class="meta mhrow"><span class="muted">Mehanizam:</span>${mh.map(mhChip).join("")}</div>`:""}
   </article>`;
 }

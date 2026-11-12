@@ -72,7 +72,7 @@ const Niv={
       LEVEL_LINKS.forEach(e=>{if(e[3]==="x"&&(e[0]===id||e[1]===id)){r.cross.push(e);r.rel.add(e[0]===id?e[1]:e[0])}else if(e[3]==="in"&&(e[0]===id||e[1]===id))r.rel.add(e[0]===id?e[1]:e[0])});
       if(mode.t==="person")evForPerson(mode.id).forEach(e=>e.i.forEach(i=>{if(i!==id)r.rel.add(i)}));
     }else if(mode.t==="case"){EV.filter(e=>e.k.includes(mode.id)&&inScope(e)).forEach(e=>e.i.forEach(i=>r.rel.add(i)))}
-    else if(mode.t==="path"){PATHS.find(p=>p.id===mode.id).steps.forEach((s,i)=>{r.rel.add(s[0]);(r.steps[s[0]]=r.steps[s[0]]||[]).push(i+1)})}
+    else if(mode.t==="path"||mode.t==="meh"){guideSteps(mode).forEach(s=>{r.rel.add(s[0]);(r.steps[s[0]]=r.steps[s[0]]||[]).push(s[2])})}
     return r;
   },
   update(){
