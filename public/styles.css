@@ -100,6 +100,10 @@ details.menu[open] summary{border-color:var(--accent)}
 .mi{all:unset;cursor:pointer;padding:7px 9px;border-radius:6px;font-size:14px}
 .mi:hover,.mi[aria-pressed="true"]{background:var(--accent-soft)}
 .mi:focus-visible{outline:2px solid var(--accent)}
+.help-b{width:min(380px,calc(100vw - 32px))}
+.help{margin:0;padding:2px 6px 6px 26px;display:grid;gap:9px;font-size:13.5px;line-height:1.5}
+.help li::marker{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.help b{font-weight:600}
 
 /* ---------- Stanje ---------- */
 .state{max-width:1640px;margin:16px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
@@ -372,6 +376,7 @@ footer p{max-width:90ch}
   .lower{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
+  .menu-b{position:fixed;left:16px;right:16px;top:calc(env(safe-area-inset-top,0px) + 70px);width:auto!important;max-height:calc(100vh - 100px)}
   .top-in{grid-template-columns:minmax(0,1fr) auto}
   .search{grid-column:1/-1;grid-row:2}
   .views{grid-row:3;overflow-x:auto;max-width:100%}
