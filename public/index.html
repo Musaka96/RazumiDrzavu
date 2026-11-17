@@ -49,12 +49,34 @@
   </div>
 </header>
 
-<section class="state pad" aria-label="Trenutno stanje">
-  <div><span class="lbl">Predsednik Republike</span><span class="v">Ana Brnabić, v.d.</span><span class="s">Izbori: raspisivanje do 27. 11, glasanje do 27. 12.</span></div>
-  <div><span class="lbl">Narodna skupština</span><span class="v">140 · 103 · 7</span><span class="s">Konstituisana 17. 11; predsednik se bira 18. 11.</span></div>
-  <div><span class="lbl">Vlada</span><span class="v">Đuro Macut</span><span class="s">Tehnički mandat; nova vlada do 15. 2. 2027.</span></div>
-  <div><span class="lbl">Vrhovno javno tužilaštvo</span><span class="v">Zagorka Dolovac</span><span class="s">Komisija kontroliše VJT u Beogradu</span></div>
+<section class="modes pad" id="modes" aria-labelledby="modes-h">
+  <div class="modes-h">
+    <span class="lbl">Tri prikaza iste vlasti</span>
+    <h1 id="modes-h">Izaberite kako čitate mapu</h1>
+  </div>
+  <div class="modes-g" role="tablist" aria-label="Prikaz">
+    <button class="mode" role="tab" data-view="lanac" aria-selected="true">
+      <span class="mode-n">01</span><span class="mode-on">Prikazano</span>
+      <svg class="mode-g" viewBox="0 0 132 64" aria-hidden="true"><circle cx="10" cy="16" r="4"/><circle cx="10" cy="32" r="4"/><circle cx="10" cy="48" r="4"/><path d="M14 16L36 30M14 32H36M14 48L36 34"/><rect x="36" y="24" width="22" height="16" rx="3"/><path d="M58 32L78 16M58 32L78 48"/><rect x="78" y="9" width="20" height="14" rx="3"/><rect x="78" y="41" width="20" height="14" rx="3"/><path d="M98 16H110M98 48H110M98 48L110 36"/><rect x="110" y="10" width="14" height="12" rx="2"/><rect x="110" y="30" width="14" height="12" rx="2"/><rect x="110" y="42" width="14" height="12" rx="2"/></svg>
+      <span class="mode-t">Ko koga bira</span>
+      <span class="mode-d">Lanac od birača do svake institucije: koliko je koja koraka udaljena od građana.</span>
+    </button>
+    <button class="mode" role="tab" data-view="nadredjenost" aria-selected="false">
+      <span class="mode-n">02</span><span class="mode-on">Prikazano</span>
+      <svg class="mode-g" viewBox="0 0 132 64" aria-hidden="true"><rect x="54" y="4" width="24" height="14" rx="3"/><path d="M66 18V25M36 25H96M36 25V30M96 25V30"/><rect x="24" y="30" width="24" height="12" rx="3"/><rect x="84" y="30" width="24" height="12" rx="3"/><path d="M36 42V48M20 48H52M20 48V52M52 48V52M96 42V48M80 48H112M80 48V52M112 48V52"/><rect x="12" y="52" width="16" height="9" rx="2"/><rect x="44" y="52" width="16" height="9" rx="2"/><rect x="72" y="52" width="16" height="9" rx="2"/><rect x="104" y="52" width="16" height="9" rx="2"/></svg>
+      <span class="mode-t">Ko je kome nadređen</span>
+      <span class="mode-d">Hijerarhija sudova, tužilaštava i izvršne vlasti: žalbe, uputstva, komanda.</span>
+    </button>
+    <button class="mode" role="tab" data-view="nivoi" aria-selected="false">
+      <span class="mode-n">03</span><span class="mode-on">Prikazano</span>
+      <svg class="mode-g" viewBox="0 0 132 64" aria-hidden="true"><rect x="8" y="4" width="116" height="10" rx="3"/><rect x="8" y="20" width="56" height="10" rx="3"/><rect x="68" y="20" width="56" height="10" rx="3"/><rect x="8" y="36" width="26" height="9" rx="2"/><rect x="38" y="36" width="26" height="9" rx="2"/><rect x="68" y="36" width="26" height="9" rx="2"/><rect x="98" y="36" width="26" height="9" rx="2"/><path d="M12 55h8M26 55h8M40 55h8M54 55h8M70 55h8M84 55h8M98 55h8M112 55h8" stroke-width="6" stroke-linecap="round"/></svg>
+      <span class="mode-t">Nivoi vlasti</span>
+      <span class="mode-d">Republika, pokrajina, Beograd, gradovi i opštine: ko koga bira i nadzire.</span>
+    </button>
+  </div>
 </section>
+
+<section class="state pad" id="state" aria-label="Trenutno stanje"></section>
 
 <main class="board pad" id="mapa">
   <div class="stage" id="stage"></div>

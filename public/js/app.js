@@ -14,6 +14,19 @@ const VIEWS={
   nivoi:{n:"Nivoi vlasti",impl:Niv,intro:["Vlast nije podeljena samo na grane nego i po nivoima: Republika, pokrajina, Beograd, gradovi i opštine. Na svakom nivou građani biraju predstavničko telo, a ono bira izvršni organ.","Kad izaberete instituciju, linije pokazuju koga bira i ko je nadzire sa višeg nivoa; na primer, Vlada može raspustiti skupštinu grada koja ne bira organe ili ne donese budžet."]}
 };
 
+/* Trenutno stanje: četiri ključne tačke za svaki prikaz; klik otvara instituciju */
+const STATE={
+  lanac:[["predsednik","Predsednik Republike","Ana Brnabić, v.d.","Izbori: raspisivanje do 27. 11, glasanje do 27. 12."],["skupstina","Narodna skupština","140 · 103 · 7","Konstituisana 17. 11; predsednik se bira 18. 11."],["vlada","Vlada","Đuro Macut","Tehnički mandat; nova vlada do 15. 2. 2027."],["vjt","Vrhovno javno tužilaštvo","Zagorka Dolovac","Komisija kontroliše VJT u Beogradu"]],
+  nadredjenost:[["ustavni","Ustavni sud · iznad svih","Vladan Petrov","Ocenjuje zakone i odluke svih organa"],["vrhovni","Vrhovni sud · vrh sudova","Miroljub Tomić","Predsednik od 1. 7. 2026."],["vjt","Vrhovno javno tužilaštvo · vrh tužilaštava","Zagorka Dolovac","VST i dalje bez izabranog predsednika"],["vlada","Vlada · vrh izvršne vlasti","Đuro Macut","Tehnički mandat; ministarstva, MUP i BIA"]],
+  nivoi:[["skupstina","Republika","140 · 103 · 7","Narodna skupština konstituisana 17. 11."],["vladaapv","AP Vojvodina","Maja Gojković","Pokrajinska vlada; Skupština: B. Juhas"],["gradonacelnik","Grad Beograd","Aleksandar Šapić","Gradonačelnik; Skupština grada: N. Nikodijević"],["opstine","Gradovi i opštine","Više od sto opština","Lokalni izbori u deset jedinica 29. 3. 2026."]]
+};
+function renderState(anim){
+  const el=$("#state");
+  el.innerHTML=STATE[view].map(([id,l,v,s])=>`<button class="st" data-room="${id}"><span class="lbl">${esc(l)}</span><span class="v">${esc(v)}</span><span class="s">${esc(s)}</span></button>`).join("");
+  if(anim){el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap")}
+  applyScript(el);
+}
+
 /* ---------- Pregled na hover ---------- */
 const tip=document.createElement("div");tip.className="tip";tip.setAttribute("role","tooltip");tip.hidden=true;document.body.appendChild(tip);
 function placeTip(x,y){const tw=tip.offsetWidth,th=tip.offsetHeight;tip.style.left=Math.max(8,Math.min(x,window.innerWidth-tw-8))+"px";tip.style.top=Math.max(8,y+th>window.innerHeight-8?y-th-28:y)+"px"}
@@ -75,9 +88,11 @@ function revealSelection(){
   if(id&&VIEWS[view].impl&&VIEWS[view].impl.focusCard)VIEWS[view].impl.focusCard(id);
 }
 function setView(v){
-  if(!VIEWS[v])v="lanac";view=v;try{localStorage.setItem("mv-view",v)}catch(e){}
+  if(!VIEWS[v])v="lanac";const changed=v!==view;view=v;try{localStorage.setItem("mv-view",v)}catch(e){}
   document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v));
   const st=$("#stage"),V=VIEWS[v];
+  if(changed){st.classList.remove("swap");void st.offsetWidth;st.classList.add("swap")}
+  renderState(changed);
   if(V.impl){V.impl.render(st);V.impl.update()}
   else st.innerHTML=`<div class="soon"><span class="lbl">Sledeća faza</span><h2>${esc(V.n)}</h2><p>${esc(V.soon)}</p><p class="muted">Izabrana institucija ostaje izabrana kada promenite prikaz.</p><button class="btn" data-goview="lanac">Nazad na „Ko koga bira“</button></div>`;
   st.querySelectorAll(".soon [data-goview]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.goview)));
@@ -244,6 +259,10 @@ function init(){
   document.querySelectorAll(".menu [data-guide]").forEach(b=>b.addEventListener("click",()=>openGuide(b.dataset.guide)));
   document.querySelector("[data-home]").addEventListener("click",e=>{e.preventDefault();setMode(null);window.scrollTo({top:0})});
   document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+  /* Mali prekidač u zaglavlju se pojavljuje tek kad velike kartice prikaza odu ispod zaglavlja */
+  const modesEl=$("#modes"),topEl=document.querySelector(".top");
+  const syncModes=()=>document.body.classList.toggle("modes-in",modesEl.getBoundingClientRect().bottom>topEl.getBoundingClientRect().bottom);
+  window.addEventListener("scroll",syncModes,{passive:true});window.addEventListener("resize",syncModes);syncModes();
   document.querySelectorAll("[data-script]").forEach(b=>b.addEventListener("click",()=>{script=b.dataset.script;try{localStorage.setItem("mv-script",script)}catch(e){}syncMenus();applyScript(document.body)}));
   document.addEventListener("click",e=>{document.querySelectorAll("details.menu[open]").forEach(d=>{if(!d.contains(e.target))d.open=false})});
   $("#gloss").innerHTML=GLOSS.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("");
