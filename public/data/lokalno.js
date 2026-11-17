@@ -1,6 +1,6 @@
 /* Pokrajina, Beograd, gradovi i opštine (verzija 4).
    Zamenjuje zajedničku instituciju „lokalna“ sa šest organa i premešta njene vesti, ljude i veze.
-   Stanje: 12. 11. 2026. Izvori za brojeve i strukturu: Ustav (čl. 183–192), Zakon o lokalnoj samoupravi, Zakon o glavnom gradu, Statut APV. */
+   Stanje: 17. 11. 2026. Izvori za brojeve i strukturu: Ustav (čl. 183–192), Zakon o lokalnoj samoupravi, Zakon o glavnom gradu, Statut APV. */
 
 Object.assign(INST,{
  skupstinaapv:{n:"Skupština AP Vojvodine",p:"Skupština AP Vojvodine",b:"lok",head:"Predsednik Balint Juhas (SVM, od 25. 4. 2024.); vladajuća većina oko 78 od 120 mesta",short:"B. Juhas · 120 poslanika",

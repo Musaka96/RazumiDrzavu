@@ -1,9 +1,9 @@
 /* Ljudi koji se pominju u vestima. m = obrazac za prepoznavanje u tekstu (regex, Unicode), room = prostorija u kojoj deluju.
-   Stanje: 12. 11. 2026. Opisi su kratki i neutralni; krivične prijave i istrage nisu presude. */
+   Stanje: 17. 11. 2026. Opisi su kratki i neutralni; krivične prijave i istrage nisu presude. */
 const L="\\p{L}";
 const PEOPLE=[
- {id:"vucic",n:"Aleksandar Vučić",m:`Vučić${L}{0,3}`,room:"sns",role:"Predsednik SNS; predsednik Republike 2017–2026.",desc:"Podneo ostavku 27. 9. 2026. da bi predvodio listu „Ujedinjena Srbija“ na vanrednim izborima; priznao poraz 25. 10."},
- {id:"brnabic",n:"Ana Brnabić",m:`Brnabić`,room:"skupstina",role:"Predsednica Narodne skupštine; v.d. predsednika Republike.",desc:"Vrši dužnost predsednika Republike od 28. 9. 2026. Zakazala je konstitutivnu sednicu nove Skupštine za 17. 11."},
+ {id:"vucic",n:"Aleksandar Vučić",m:`Vučić${L}{0,3}`,room:"sns",role:"Predsednik SNS; predsednik Republike 2017–2026.",desc:"Podneo ostavku 27. 9. 2026. da bi predvodio listu „Ujedinjena Srbija“ na vanrednim izborima; priznao poraz 25. 10. Od 17. 11. narodni poslanik i šef poslaničke grupe SNS."},
+ {id:"brnabic",n:"Ana Brnabić",m:`Brnabić`,room:"skupstina",role:"Predsednica Narodne skupštine; v.d. predsednika Republike.",desc:"Vrši dužnost predsednika Republike od 28. 9. 2026. Zakazala je konstitutivnu sednicu nove Skupštine, održanu 17. 11."},
  {id:"macut",n:"Đuro Macut",m:`Macut${L}{0,2}`,room:"vlada",role:"Predsednik Vlade, tehnički mandat.",desc:"Nestranački premijer od 16. 4. 2025. Njegova Vlada predložila je raspuštanje Skupštine 7. 9. 2026."},
  {id:"vucevic",n:"Miloš Vučević",m:`Vučević${L}{0,3}`,room:"vlada",role:"Bivši predsednik Vlade.",desc:"Podneo ostavku 28. 1. 2025, posle napada na studente u Novom Sadu."},
  {id:"dolovac",n:"Zagorka Dolovac",m:`Dolovac`,room:"vjt",role:"Vrhovna javna tužiteljka.",desc:"U oktobru 2026. izdala obavezno uputstvo za izborna krivična dela i formirala komisiju koja kontroliše VJT u Beogradu."},

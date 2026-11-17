@@ -21,7 +21,7 @@ const MECH=[
    {a:"osnovni",w:"Sudija za prethodni postupak",t:"Žalba na zadržavanje",d:"Osumnjičeni i branilac mogu se žaliti sudiji, koji o tome hitno odlučuje.",r:"žalba za 6 h, odluka za 4 h"}],
   ends:[["Puštanje na slobodu","Ako nema razloga za pritvor, osumnjičeni se pušta; postupak može da se nastavi."],["Predlog za pritvor","Tužilac traži od suda pritvor ili blažu meru (vidi mehanizam „Pritvor“)."]],
   checks:["Sudija za prethodni postupak odlučuje o žalbi.","Branilac je obavezan od prvog saslušanja zadržanog.","Pretpostavka nevinosti važi do pravnosnažne presude."],
-  ev:["Uhapšeni načelnik UKP","Uhapšen vlasnik Alta banke","Uhapšen komandant SAJ","Uhapšen bivši ministar Rade Basta","Uhapšen pokrajinski sekretar","Nalozi za hapšenje vlasnika"]},
+  ev:["Uhapšeni načelnik UKP","Uhapšen vlasnik Alta banke","Uhapšen komandant SAJ","Uhapšen bivši ministar Rade Basta","Uhapšen pokrajinski sekretar","Nalozi za hapšenje vlasnika","Uhapšeni dekan","TOK: uhapšeno šest osoba"]},
 
  {id:"pritvor",n:"Pritvor i blaže mere",b:"jud",inst:["osnovni","apelacioni","tok","vjtbg","tuzilastva"],
   sum:"Sud na predlog tužioca može odrediti pritvor ako postoji opasnost od bekstva, uticaja na svedoke ili ponavljanja dela; pre toga mora razmotriti blaže mere.",
@@ -34,7 +34,7 @@ const MECH=[
    {a:"apelacioni",w:"Veće višeg suda",t:"Dalje produženje",d:"Za dela sa propisanom kaznom većom od pet godina veće neposredno višeg suda može pritvor produžiti još najviše tri meseca.",r:"+3 meseca, ukupno 6"}],
   ends:[["Ukidanje pritvora","Čim prestanu razlozi, pritvor se ukida; tada se može odrediti blaža mera. Ako optužnica ne bude podignuta u roku, okrivljeni se pušta."],["Optužnica","Pošto je podignuta optužnica, o pritvoru odlučuje sud koji sudi, a rokovi se računaju drukčije."]],
   checks:["Pritvor se određuje samo ako se cilj ne može postići blažom merom.","Sud po službenoj dužnosti proverava da li razlozi još postoje.","Ustavna žalba i, na kraju, Evropski sud za ljudska prava."],
-  ev:["Uhapšen vlasnik Alta banke"]},
+  ev:["Uhapšen vlasnik Alta banke","pritvor za Radeta Bastu","Kričku određen pritvor","Uhapšeni dekan","Poternica za Milanom"]},
 
  {id:"prijava",n:"Krivična prijava i odluka tužioca",b:"pro",inst:["tuzilastva","tok","vjtbg","vjt","tuzrz"],
   sum:"Svako može tužiocu prijaviti krivično delo; tužilac proverava navode i odlučuje da li će prijavu odbaciti ili pokrenuti istragu.",
@@ -46,7 +46,7 @@ const MECH=[
    {a:"tuzilastva",w:"Javni tužilac",t:"Odluka",d:"Tužilac odbacuje prijavu ako nema osnova sumnje, ili naredbom pokreće istragu."}],
   ends:[["Odbacivanje","Oštećeni se obaveštava i može podneti prigovor neposredno višem tužilaštvu."],["Istraga","Postupak prelazi u istragu protiv poznatog ili nepoznatog učinioca (vidi „Istraga i optužnica“)."]],
   checks:["Prigovor oštećenog višem tužiocu u roku od 8 dana od obaveštenja.","Viši tužilac nadzire rad nižeg i može mu dati obavezno uputstvo.","Podnošenje prijave samo po sebi ne znači krivicu."],
-  ev:["TOK otvara predmete protiv direktora BIA","Prijava protiv glavnog tužioca VJT","Bivša tužiteljka za ratne zločine saslušana","Studenti traže istragu „Sky poruka“","hapšenja zbog prijava birača"]},
+  ev:["TOK otvara predmete protiv direktora BIA","Prijava protiv glavnog tužioca VJT","Bivša tužiteljka za ratne zločine saslušana","Studenti traže istragu „Sky poruka“","hapšenja zbog prijava birača","Agencija prijavila","Treće OJT najavljuje prijave"]},
 
  {id:"istraga",n:"Istraga i optužnica",b:"pro",inst:["tuzilastva","tok","vjtbg","osnovni","apelacioni","mup"],
   sum:"Tužilac vodi istragu i prikuplja dokaze uz pomoć policije; kad završi, podiže optužnicu, a sud proverava da li ima dovoljno dokaza da se sudi.",
@@ -118,7 +118,7 @@ const MECH=[
    {a:"vjtbg",w:"Glavni tužilac / predsednik suda",t:"Odluka",d:"O izuzeću tužioca odlučuje glavni javni tužilac tog tužilaštva, o izuzeću glavnog tužioca neposredno viši glavni tužilac, o izuzeću tužioca u Vrhovnom javnom tužilaštvu Vrhovni javni tužilac, a o izuzeću Vrhovnog javnog tužioca Visoki savet tužilaštva, po mišljenju kolegijuma VJT. O izuzeću sudije odlučuje predsednik suda."}],
   ends:[["Usvojen","Predmet dobija drugi tužilac ili sudija."],["Odbijen","Postupak nastavlja isti nosilac funkcije."]],
   checks:["Zloupotreba zahteva radi odugovlačenja može biti sankcionisana.","Izmene Zakona o javnom tužilaštvu iz 2026. nisu menjale pravila o izuzeću."],
-  ev:["Nalozi za hapšenje vlasnika"]},
+  ev:["Nalozi za hapšenje vlasnika","Treće OJT najavljuje prijave"]},
 
  /* ---------- Tužilačka hijerarhija i saveti ---------- */
  {id:"uputstvo",n:"Obavezno uputstvo i nadzor u tužilaštvu",b:"pro",inst:["vjt","vjtbg","tuzilastva","tok"],
@@ -158,7 +158,7 @@ const MECH=[
    {a:"vst",w:"Visoki savet",t:"Žalba i razrešenje",d:"O žalbi na odluku komisije odlučuje savet. Za teške disciplinske prekršaje savet može pokrenuti razrešenje.",r:"žalba za 8 dana"}],
   ends:[["Disciplinska mera","Protiv konačne odluke saveta može se voditi upravni spor."],["Razrešenje","Protiv odluke o razrešenju može se izjaviti žalba Ustavnom sudu."],["Odbijanje","Postupak se završava."]],
   checks:["Ustavni sud odlučuje o žalbama na razrešenje.","Disciplinska odgovornost ne isključuje krivičnu.","Izmene iz 2026. nisu menjale disciplinski postupak tužilaca."],
-  ev:["Izveštaj komisije: „paratužilački sistem“"]},
+  ev:["Izveštaj komisije: „paratužilački sistem“","Stefanović uzvraća komisiji"]},
 
  {id:"sudije-izbor",n:"Izbor sudija i predsednika sudova",b:"jud",inst:["vss","vrhovni"],
   sum:"Od ustavnih promena 2022. Visoki savet sudstva bira sve sudije i predsednike sudova, uključujući i predsednika Vrhovnog suda; Skupština više ne učestvuje.",
@@ -277,7 +277,7 @@ const MECH=[
    {a:"skupstina",w:"Narodna skupština",t:"Izbor Vlade",d:"Mandatar izlaže program i predlaže ministre; Skupština glasa o svima zajedno.",r:"90 dana od konstituisanja"}],
   ends:[["Izabrana Vlada","Ministri polažu zakletvu."],["Raspuštanje","Ako Vlada ne bude izabrana u roku, Skupština se raspušta i raspisuju se novi izbori."]],
   checks:["Rok od 90 dana je ustavni."],
-  ev:["Zakazana konstitutivna sednica","Konstitutivna sednica nove Skupštine","Kos: nova vlada"]},
+  ev:["Zakazana konstitutivna sednica","Konstitutivna sednica nove Skupštine","Kos: nova vlada","Konstituisana nova Skupština","Nastavak konstitutivne sednice","Konsultacije pred konstitutivnu"]},
 
  {id:"nadzor-skupstine",n:"Nadzor Skupštine nad Vladom i službama",b:"leg",inst:["skupstina","vlada","bia","vojska","mup"],
   sum:"Skupština kontroliše Vladu poslaničkim pitanjima, interpelacijom, anketnim odborima i javnim slušanjima, a službe bezbednosti preko posebnog odbora.",
@@ -299,7 +299,7 @@ const MECH=[
    {a:"skupstina",w:"Odbori Skupštine",t:"Saslušanje i nadzor",d:"Nadležni odbori mogu pozivati direktore i razmatrati izveštaje."}],
   ends:[["Nova postavljenja","Do postavljenja može se odrediti vršilac dužnosti."]],
   checks:["Vlada u ostavci vrši samo tekuće poslove; da li to uključuje kadrovske promene, sporno je.","Razrešenje direktora policije može se osporiti pred sudom."],
-  ev:["Studentska lista traži smene","Radar: smene u vrhu BIA"]},
+  ev:["Studentska lista traži smene","Radar: smene u vrhu BIA","šef VBA"]},
 
  {id:"kontrola-policije",n:"Pritužba i kontrola rada policije",b:"exe",inst:["mup","ombudsman","tuzilastva","vjtbg"],
   sum:"Građanin može uložiti pritužbu na postupanje policije; zakonitost rada proverava Sektor unutrašnje kontrole, a krivična dela goni tužilaštvo.",
@@ -311,7 +311,7 @@ const MECH=[
    {a:"tuzilastva",w:"Javni tužilac",t:"Krivično gonjenje",d:"Ako postoji sumnja na krivično delo, na primer prekoračenje ovlašćenja, odlučuje tužilac."}],
   ends:[["Disciplina ili gonjenje","Odgovornost policajca."],["Preporuka","Zaštitnik građana daje preporuku MUP-u."]],
   checks:["Zaštitnik građana kontroliše rad MUP-a.","Skupštinski odbor nadzire policiju."],
-  ev:["Veliki protest u Beogradu","na protestu nije korišćen zvučni top"]},
+  ev:["Veliki protest u Beogradu","na protestu nije korišćen zvučni top","Veselin Milić"]},
 
  /* ---------- Nezavisna tela ---------- */
  {id:"rem-mere",n:"Mere REM-a prema televizijama",b:"ind",inst:["rem","upravni"],
@@ -324,7 +324,7 @@ const MECH=[
    {a:"upravni",w:"Upravni sud",t:"Upravni spor",d:"Emiter može tužbom osporiti odluku pred Upravnim sudom."}],
   ends:[["Izvršenje mere","Emiter mora da je sprovede; za nepoštovanje sledi stroža mera."],["Poništaj","Upravni sud može poništiti odluku."]],
   checks:["Upravni sud.","Skupština bira Savet REM-a i razmatra njegov izveštaj."],
-  ev:["REM ne uvodi Informer","REM zabranjuje emisiju","REM: 25 dana zabrane"]},
+  ev:["REM ne uvodi Informer","REM zabranjuje emisiju","REM: 25 dana zabrane","REM: nove mere"]},
 
  {id:"izbor-nezavisnih",n:"Izbor nezavisnih tela u Skupštini",b:"ind",inst:["skupstina","rem","poverenik","ombudsman","ravnopravnost","dri","acas"],
   sum:"Skupština bira Zaštitnika građana, Poverenike, Savet REM-a, Savet DRI i Odbor Agencije za sprečavanje korupcije; predloge daju odbori ili ovlašćeni predlagači.",
@@ -393,7 +393,7 @@ const MECH=[
    {a:"acas",w:"Agencija",t:"Mera",d:"Opomena, javno objavljivanje odluke ili preporuka za razrešenje; prekršajne i krivične prijave."}],
   ends:[["Mera","Objavljuje se."],["Prijava","Prekršajni sud ili tužilaštvo odlučuje."]],
   checks:["Upravni sud po tužbi protiv odluka Agencije."],
-  ev:[]},
+  ev:["Agencija prijavila","Siniša Mali podnosi ostavku"]},
 
  {id:"banka-stecaj",n:"Oduzimanje dozvole banci i stečaj",b:"ind",inst:["nbs","tok"],
   sum:"NBS nadzire banke; kad banka ne može da posluje zakonito ili solventno, oduzima joj dozvolu, a Agencija za osiguranje depozita isplaćuje štediše.",

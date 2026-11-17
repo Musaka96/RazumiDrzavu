@@ -1,4 +1,4 @@
-/* Dopune: prostorije, sajtovi, veze i vesti dodate u verziji 3. Stanje: 12. 11. 2026. */
+/* Dopune: prostorije, sajtovi, veze i vesti dodate u verziji 3. Stanje: 17. 11. 2026. */
 Object.assign(INST,{
  nbs:{n:"Narodna banka Srbije",p:"Narodna banka",b:"ind",head:"Guvernerka Jorgovanka Tabaković (od 2012; treći mandat od jula 2024.)",short:"J. Tabaković",
   role:"Centralna banka: vodi monetarnu politiku, čuva stabilnost dinara i finansijskog sistema, izdaje i oduzima dozvole bankama. U slučaju Alta banke oduzela je dozvolu, a sud je otvorio stečaj.",chosen:"Guvernera bira Skupština na predlog predsednika Republike",term:"6 godina"},
