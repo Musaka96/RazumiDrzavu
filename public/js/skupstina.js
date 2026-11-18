@@ -26,7 +26,7 @@ const SK_THRESH=[
 const SK_STEPS=[
   ["5. 11.","Konačni rezultati","RIK potvrđuje raspodelu mandata posle ponovljenog glasanja.","rik","done"],
   ["17. 11.","Konstitutivna sednica","Potvrđeni mandati svih 250 poslanika. Od tog dana teče rok od 90 dana za izbor Vlade.","skupstina","done"],
-  ["18. 11.","Izbor predsednika Skupštine","Kandidati Aleksandar Čupić (Studentska lista) i Stojan Radenović (SNS). Potrebno je 126 glasova.","skupstina","now"],
+  ["19. 11.","Izbor predsednika Skupštine","Rasprava 18. 11. završena je bez glasanja. Kandidati su Aleksandar Čupić (Studentska lista) i Stojan Radenović (SNS); potrebno je 126 glasova.","skupstina","now"],
   ["sledi","Predlog mandatara","V.d. predsednika Republike posle konsultacija sa poslaničkim grupama predlaže kandidata za predsednika Vlade.","predsednik","next"],
   ["do 15. 2. 2027.","Izbor Vlade","Skupština glasa o programu i ministrima, većinom svih poslanika. Ako Vlada ne bude izabrana u roku, predsednik raspušta Skupštinu.","vlada","next"]
 ];

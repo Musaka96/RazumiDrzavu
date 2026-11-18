@@ -1,4 +1,4 @@
-/* Poslanici novog saziva Narodne skupštine (konstituisan 17. 11. 2026) — ključna imena, uz izvore. Stanje: 18. 11. 2026, pre glasanja o predsedniku Skupštine.
+/* Poslanici novog saziva Narodne skupštine (konstituisan 17. 11. 2026) — ključna imena, uz izvore. Stanje: 18. 11. 2026, uveče; predsednik Skupštine još nije izabran.
    Unos: id (postojeća osoba iz ljudi.js ili nova), za novu osobu i n, m, role, desc;
    g = lista (sl, sns, svm, alb, sdp, sda, spp), party = stranka, fn = funkcija u Skupštini,
    prev = [[id institucije ili null, funkcija]], s = izvori, u:1 = nepotvrđeno (jedan izvor ili samo provladini/tabloidni mediji).

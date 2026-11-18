@@ -37,7 +37,7 @@ const PEOPLE=[
  {id:"antonijevic",n:"Milan Antonijević",m:`Antonijević${L}{0,3}`,room:"ravnopravnost",role:"Poverenik za zaštitu ravnopravnosti.",desc:"Izabran 3. 12. 2025. Tokom i posle kampanje upozoravao na diskriminaciju i pritiske na novinare."},
  {id:"gasic",n:"Bratislav Gašić",m:`(?<!Jugoslav${L}{0,2}\\s)Gašić${L}{0,3}`,room:"vojska",role:"Ministar odbrane, tehnički mandat.",desc:"Ministar odbrane od maja 2024."},
  {id:"jovanic",n:"Đuro Jovanić",m:`Jovanić${L}{0,3}`,room:"vojska",role:"Direktor VBA.",desc:"Studentska lista je 29. 10. 2026. tražila njegovu smenu."},
- {id:"mojsilovic",n:"Milan Mojsilović",m:`Mojsilović${L}{0,3}`,room:"vojska",role:"Načelnik Generalštaba Vojske Srbije.",desc:"Na dužnosti od septembra 2018."},
+ {id:"mojsilovic",n:"Milan Mojsilović",m:`Mojsilović${L}{0,3}`,room:"vojska",role:"Bivši načelnik Generalštaba Vojske Srbije.",desc:"Načelnik od septembra 2018. Penzionisan je 16. 11. 2026, prema Ministarstvu odbrane na sopstveni zahtev."},
  {id:"gojkovic",n:"Maja Gojković",m:`Gojković`,room:"lokalna",role:"Predsednica Pokrajinske vlade.",desc:"Na čelu Vlade AP Vojvodine od maja 2024."},
  {id:"sapic",n:"Aleksandar Šapić",m:`Šapić${L}{0,3}`,room:"lokalna",role:"Gradonačelnik Beograda.",desc:"Posle izbora traže se njegova ostavka i vanredni gradski izbori; Skupština grada o razrešenju 23. 11."},
  {id:"bjelos",n:"Irena Bjeloš",m:`Bjeloš`,room:"tok",role:"Tužiteljka TOK-a.",desc:"Vodi slučaj „Konjuh“; upućena iz TOK-a u martu i vraćena u junu 2026."},

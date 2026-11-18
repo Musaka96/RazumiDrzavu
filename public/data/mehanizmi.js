@@ -277,7 +277,7 @@ const MECH=[
    {a:"skupstina",w:"Narodna skupština",t:"Izbor Vlade",d:"Mandatar izlaže program i predlaže ministre; Skupština glasa o svima zajedno.",r:"90 dana od konstituisanja"}],
   ends:[["Izabrana Vlada","Ministri polažu zakletvu."],["Raspuštanje","Ako Vlada ne bude izabrana u roku, Skupština se raspušta i raspisuju se novi izbori."]],
   checks:["Rok od 90 dana je ustavni."],
-  ev:["Zakazana konstitutivna sednica","Konstitutivna sednica nove Skupštine","Kos: nova vlada","Konstituisana nova Skupština","Nastavak konstitutivne sednice","Konsultacije pred konstitutivnu"]},
+  ev:["Zakazana konstitutivna sednica","Konstitutivna sednica nove Skupštine","Kos: nova vlada","Konstituisana nova Skupština","Nastavak konstitutivne sednice","Konsultacije pred konstitutivnu","Ni drugog dana nije izabran"]},
 
  {id:"nadzor-skupstine",n:"Nadzor Skupštine nad Vladom i službama",b:"leg",inst:["skupstina","vlada","bia","vojska","mup"],
   sum:"Skupština kontroliše Vladu poslaničkim pitanjima, interpelacijom, anketnim odborima i javnim slušanjima, a službe bezbednosti preko posebnog odbora.",
