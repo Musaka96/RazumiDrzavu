@@ -16,6 +16,7 @@ public/
     lanac.js            prikaz „Ko koga bira“ (lanac legitimiteta; nivoi se računaju iz LEGIT veza)
     nadredjenost.js     prikaz „Ko je kome nadređen“ (stabla HIER, opisi linija HIER_INFO, veze između stabala HIER_CROSS)
     nivoi.js            prikaz „Nivoi vlasti“ (pojasevi LEVELS, veze LEVEL_LINKS, opisi LEVEL_INFO)
+    skupstina.js        prikaz „Skupština“ (mesta po listama SEATS, pragovi SK_THRESH, rokovi SK_STEPS)
     app.js              okvir: stanje, prekidač prikaza, panel sa karticama, istorija „Nazad“, pretraga, mobilni donji list
   data/
     institucije.js      institucije (INST) i sve veze (LINKS)
@@ -23,6 +24,7 @@ public/
     dopune.js           institucije, sajtovi i vesti dodati u verziji 3
     ljudi.js            ljudi (PEOPLE) i nazivi institucija (ALIASES) koji se prepoznaju u tekstu
     lokalno.js          pokrajina, Beograd, gradovi i opštine; zamenjuje staru zajedničku instituciju „lokalna“
+    poslanici.js        ključni poslanici novog saziva (MP_LIST: lista, stranka, funkcija, ranije funkcije, izvori); dopunjuje PEOPLE
     mehanizmi.js        mehanizmi (MECH): koraci, ishodi, kontrola i vesti u kojima su korišćeni
     slike.js            portreti (IMG.p, po id osobe) i grbovi/znakovi (IMG.i, po id institucije), sa autorom, licencom i linkom na Commons
   img/

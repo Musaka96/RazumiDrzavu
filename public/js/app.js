@@ -11,14 +11,16 @@ const peopleIn=id=>PEOPLE.filter(p=>p.room===id);
 const VIEWS={
   lanac:{n:"Ko koga bira",impl:Lanac,intro:["Institucije su poređane po tome koliko su koraka udaljene od birača. Građani neposredno biraju samo Skupštinu, predsednika i lokalne skupštine; gotovo sve ostalo bira ili predlaže Skupština.","Kad izaberete instituciju, istaknut je njen lanac do birača i sve što ona bira. Pređite mišem preko linije da vidite šta taj odnos znači."]},
   nadredjenost:{n:"Ko je kome nadređen",impl:Nad,intro:["Tri stabla pokazuju nadređenost unutar sudova, tužilaštava i izvršne vlasti: ko odlučuje o žalbama, ko daje uputstva, ko je u čijem sastavu. Ustavni sud je iznad svih.","Iznad svakog stabla je telo koje bira kadrove (VSS, VST) ili komanduje (predsednik). Kad izaberete instituciju, isprekidane linije pokazuju veze sa drugim stablima, na primer da policija u istrazi radi po nalogu tužioca."]},
-  nivoi:{n:"Nivoi vlasti",impl:Niv,intro:["Vlast nije podeljena samo na grane nego i po nivoima: Republika, pokrajina, Beograd, gradovi i opštine. Na svakom nivou građani biraju predstavničko telo, a ono bira izvršni organ.","Kad izaberete instituciju, linije pokazuju koga bira i ko je nadzire sa višeg nivoa; na primer, Vlada može raspustiti skupštinu grada koja ne bira organe ili ne donese budžet."]}
+  nivoi:{n:"Nivoi vlasti",impl:Niv,intro:["Vlast nije podeljena samo na grane nego i po nivoima: Republika, pokrajina, Beograd, gradovi i opštine. Na svakom nivou građani biraju predstavničko telo, a ono bira izvršni organ.","Kad izaberete instituciju, linije pokazuju koga bira i ko je nadzire sa višeg nivoa; na primer, Vlada može raspustiti skupštinu grada koja ne bira organe ili ne donese budžet."]},
+  skupstina:{n:"Skupština",impl:Sk,intro:["Narodna skupština je konstituisana 17. 11. 2026. Polukrug pokazuje 250 mesta po listama, a pragovi koliko glasova treba za izbor Vlade, Vrhovnog javnog tužioca ili promenu Ustava.","Studentska lista ima većinu od 140 mesta, dovoljnu za Vladu i budžet, ali ne i za odluke koje traže tri petine ili dve trećine. Kad izaberete instituciju, istaknute su njene veze sa Skupštinom."]}
 };
 
 /* Trenutno stanje: četiri ključne tačke za svaki prikaz; klik otvara instituciju */
 const STATE={
   lanac:[["predsednik","Predsednik Republike","Ana Brnabić, v.d.","Izbori: raspisivanje do 27. 11, glasanje do 27. 12."],["skupstina","Narodna skupština","140 · 103 · 7","Konstituisana 17. 11; predsednik se bira 18. 11."],["vlada","Vlada","Đuro Macut","Tehnički mandat; nova vlada do 15. 2. 2027."],["vjt","Vrhovno javno tužilaštvo","Zagorka Dolovac","Komisija kontroliše VJT u Beogradu"]],
   nadredjenost:[["ustavni","Ustavni sud · iznad svih","Vladan Petrov","Ocenjuje zakone i odluke svih organa"],["vrhovni","Vrhovni sud · vrh sudova","Miroljub Tomić","Predsednik od 1. 7. 2026."],["vjt","Vrhovno javno tužilaštvo · vrh tužilaštava","Zagorka Dolovac","VST i dalje bez izabranog predsednika"],["vlada","Vlada · vrh izvršne vlasti","Đuro Macut","Tehnički mandat; ministarstva, MUP i BIA"]],
-  nivoi:[["skupstina","Republika","140 · 103 · 7","Narodna skupština konstituisana 17. 11."],["vladaapv","AP Vojvodina","Maja Gojković","Pokrajinska vlada; Skupština: B. Juhas"],["gradonacelnik","Grad Beograd","Aleksandar Šapić","Gradonačelnik; Skupština grada: N. Nikodijević"],["opstine","Gradovi i opštine","Više od sto opština","Lokalni izbori u deset jedinica 29. 3. 2026."]]
+  nivoi:[["skupstina","Republika","140 · 103 · 7","Narodna skupština konstituisana 17. 11."],["vladaapv","AP Vojvodina","Maja Gojković","Pokrajinska vlada; Skupština: B. Juhas"],["gradonacelnik","Grad Beograd","Aleksandar Šapić","Gradonačelnik; Skupština grada: N. Nikodijević"],["opstine","Gradovi i opštine","Više od sto opština","Lokalni izbori u deset jedinica 29. 3. 2026."]],
+  skupstina:[["skupstina","Sastav","140 · 103 · 7","Studentska lista · lista SNS · manjine"],["skupstina","Predsednik Skupštine","Glasanje 18. 11.","A. Čupić ili S. Radenović; potrebno 126"],["studenti","Većina","140 od 250","Iznad 126; ispod tri petine (150)"],["vlada","Rok za Vladu","15. 2. 2027.","90 dana od konstituisanja"]]
 };
 function renderState(anim){
   const el=$("#state");
@@ -163,9 +165,25 @@ function renderPanel(){
     const P=PBY[mode.id],evs=evForPerson(mode.id),tab=mode.tab||"pregled";wc=bc(INST[P.room].b);
     const ph=imgP(P.id);
     h=`<div class="ph${ph?" ph-p":""}">${ph?`<img class="pic" src="${esc(ph.f)}" onerror="this.style.visibility='hidden'" alt="${esc(P.n)}" width="56" height="56">`:`<div class="ico">${icoSvg(P.room,26)}</div>`}<div><span class="lbl">Osoba</span><h2>${esc(P.n)}</h2></div>${ph?credit(ph,"Foto"):""}</div>`;
-    h+=tabsHtml([["pregled","Pregled"],["vesti","Vesti",evs.length]],tab);
-    if(tab==="pregled")h+=`<p><strong>${esc(P.role)}</strong></p><p>${linkify(esc(P.desc),"p:"+P.id)}</p><dl><dt>Institucija</dt><dd><button class="lk" data-room="${P.room}">${esc(INST[P.room].n)}</button></dd></dl>
-      ${evs.length?`<div class="sec"><span class="lbl">Najnovije</span>${itemHtml(evs[0],"p:"+P.id)}${evs.length>1?`<button class="lk" data-tab="vesti">Sve vesti (${evs.length})</button>`:""}</div>`:""}`;
+    const MP=typeof MPS!=="undefined"&&MPS[P.id],co=coOf(P.id),G=MP&&SEATS.find(g=>g.k===MP.g);
+    const nLinks=(MP?MP.prev.length:0)+co.p.length+co.i.length;
+    h+=tabsHtml([["pregled","Pregled"],["veze","Veze",nLinks],["vesti","Vesti",evs.length]],tab);
+    const grpHtml=G?`${G.room?`<button class="lk" data-room="${G.room}">${esc(G.n)}</button>`:esc(G.n)}`:"";
+    if(tab==="pregled")h+=`<p><strong>${esc(P.role)}</strong></p><p>${linkify(esc(P.desc),"p:"+P.id)}</p>
+      ${MP?`<dl><dt>Poslanik</dt><dd>${grpHtml}${MP.party?` · ${esc(MP.party)}`:""}${MP.u?` <span class="unc">nepotvrđeno</span>`:""}</dd>${MP.fn?`<dt>U Skupštini</dt><dd>${esc(MP.fn)}</dd>`:""}${MP_HEADS[MP.g]&&MP_HEADS[MP.g]!==P.id&&PBY[MP_HEADS[MP.g]]?`<dt>Šef grupe</dt><dd><button class="lk" data-person="${MP_HEADS[MP.g]}">${esc(PBY[MP_HEADS[MP.g]].n)}</button></dd>`:""}</dl>`
+        :`<dl><dt>Institucija</dt><dd><button class="lk" data-room="${P.room}">${esc(INST[P.room].n)}</button></dd></dl>`}
+      ${nLinks?`<button class="lk" data-tab="veze">Veze (${nLinks})</button>`:""}
+      ${evs.length?`<div class="sec"><span class="lbl">Najnovije</span>${itemHtml(evs[0],"p:"+P.id)}${evs.length>1?`<button class="lk" data-tab="vesti">Sve vesti (${evs.length})</button>`:""}</div>`:""}
+      ${MP&&MP.s.length?`<p class="credit">Izvori: ${MP.s.map(([n,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(", ")}</p>`:""}`;
+    else if(tab==="veze"){
+      const mates=MP?Object.values(MPS).filter(x=>x.g===MP.g&&x.id!==P.id&&PBY[x.id]):[];
+      h+=`${MP&&MP.prev.length?`<div class="sec0"><span class="lbl">Funkcije</span><ul class="rl">${MP.prev.map(([r,t])=>`<li><div class="rr">${INST[r]?`<button class="lk" data-room="${r}">${esc(INST[r].p)}</button> · `:""}<span class="rv">${esc(t)}</span></div></li>`).join("")}</ul></div>`:""}
+      ${MP?`<div class="sec"><span class="lbl">Lista i poslanička grupa</span><p>${grpHtml}${MP.party?` · stranka: ${esc(MP.party)}`:""}</p>${mates.length?`<div class="cochips">${mates.map(x=>coChip(x.id,null)).join("")}</div>`:""}</div>`:`<dl><dt>Institucija</dt><dd><button class="lk" data-room="${P.room}">${esc(INST[P.room].n)}</button></dd></dl>`}
+      ${co.p.length||co.i.length?`<div class="sec"><span class="lbl">Zajedno u vestima</span><p class="muted">Ko se pojavljuje u istim vestima; broj je broj zajedničkih vesti. To nije dokaz saradnje ni sukoba.</p>
+        ${co.p.length?`<div class="cochips">${co.p.map(([id,n])=>coChip(id,n)).join("")}</div>`:""}
+        ${co.i.length?`<div class="cochips">${co.i.map(([id,n])=>`<button class="coc" data-room="${id}" style="--wc:${bc(INST[id].b)}">${icoSvg(id,14)}<span>${esc(INST[id].p)}</span><span class="tc">${n}</span></button>`).join("")}</div>`:""}</div>`
+        :`<p class="muted">U vestima iz ovog perioda nema drugih osoba ni institucija uz ovo ime.</p>`}`;
+    }
     else h+=`<div class="vbar">${periodSeg()}</div>${newsList(evs,"p:"+P.id)}`;
   }else if(mode.t==="path"){
     const P=PATHS.find(x=>x.id===mode.id);
@@ -191,6 +209,17 @@ function renderPanel(){
   p.querySelectorAll("[data-guide]").forEach(b=>b.addEventListener("click",()=>openGuide(b.dataset.guide)));
   applyScript(p);
 }
+/* Ko se pojavljuje u istim vestima kao osoba: druge osobe i institucije, po broju zajedničkih vesti */
+function coOf(id){
+  const evs=evForPerson(id),P=PBY[id],pc={},ic={};
+  evs.forEach(e=>{
+    PEOPLE.forEach(q=>{if(q.id!==id&&personRe(q.id).test(e.t+" "+e.x))pc[q.id]=(pc[q.id]||0)+1});
+    e.i.forEach(i=>{if(i!==P.room&&INST[i])ic[i]=(ic[i]||0)+1});
+  });
+  const top=o=>Object.entries(o).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,10);
+  return{p:top(pc),i:top(ic)};
+}
+const coChip=(id,n)=>{const q=PBY[id];return `<button class="coc" data-person="${id}" style="--wc:${bc(INST[q.room].b)}">${avatar(id,18)}<span>${esc(q.n)}</span>${n!=null?`<span class="tc">${n}</span>`:""}</button>`};
 function legendHtml(){
   return `<div class="legend">${BR_ORDER.map(b=>`<span><i class="sw" style="--wc:${bc(b)}" data-b="${b}"></i>${esc(BR[b].n)}</span>`).join("")}</div>`;
 }

@@ -27,6 +27,7 @@
       <button role="tab" data-view="lanac" aria-selected="true">Ko koga bira</button>
       <button role="tab" data-view="nadredjenost" aria-selected="false">Ko je kome nadređen</button>
       <button role="tab" data-view="nivoi" aria-selected="false">Nivoi vlasti</button>
+      <button role="tab" data-view="skupstina" aria-selected="false">Skupština</button>
     </nav>
     <div class="menus">
       <details class="menu">
@@ -42,7 +43,7 @@
         <div class="menu-b help-b">
           <span class="lbl">Kako se koristi mapa</span>
           <ol class="help">
-            <li><b>Izaberite prikaz.</b> „Ko koga bira“ pokazuje lanac od birača do svake institucije, „Ko je kome nadređen“ hijerarhiju, a „Nivoi vlasti“ republiku, pokrajinu, grad i opštinu.</li>
+            <li><b>Izaberite prikaz.</b> „Ko koga bira“ pokazuje lanac od birača do svake institucije, „Ko je kome nadređen“ hijerarhiju, „Nivoi vlasti“ republiku, pokrajinu, grad i opštinu, a „Skupština“ sastav novog saziva i pragove za glasanje.</li>
             <li><b>Kliknite instituciju.</b> Panel prikazuje ko je vodi, kako se bira, njene veze, mehanizme i vesti. Kad samo pređete mišem preko kartice, vidite kratak pregled.</li>
             <li><b>Pređite mišem preko linije</b> da vidite šta veza znači, na primer „bira 5 sudija“.</li>
             <li><b>Vodiči</b> objašnjavaju korak po korak kako nastaje zakon, tok važnih slučajeva i mehanizme kao što su pritvor ili pomilovanje. Učesnici se na mapi ističu brojevima koraka.</li>
@@ -66,7 +67,7 @@
 
 <section class="modes pad" id="modes" aria-labelledby="modes-h">
   <div class="modes-h">
-    <span class="lbl">Tri prikaza iste vlasti</span>
+    <span class="lbl">Četiri prikaza iste vlasti</span>
     <h1 id="modes-h">Izaberite kako čitate mapu</h1>
   </div>
   <div class="modes-g" role="tablist" aria-label="Prikaz">
@@ -87,6 +88,12 @@
       <svg class="mode-g" viewBox="0 0 132 64" aria-hidden="true"><rect x="8" y="4" width="116" height="10" rx="3"/><rect x="8" y="20" width="56" height="10" rx="3"/><rect x="68" y="20" width="56" height="10" rx="3"/><rect x="8" y="36" width="26" height="9" rx="2"/><rect x="38" y="36" width="26" height="9" rx="2"/><rect x="68" y="36" width="26" height="9" rx="2"/><rect x="98" y="36" width="26" height="9" rx="2"/><path d="M12 55h8M26 55h8M40 55h8M54 55h8M70 55h8M84 55h8M98 55h8M112 55h8" stroke-width="6" stroke-linecap="round"/></svg>
       <span class="mode-t">Nivoi vlasti</span>
       <span class="mode-d">Republika, pokrajina, Beograd, gradovi i opštine: ko koga bira i nadzire.</span>
+    </button>
+    <button class="mode" role="tab" data-view="skupstina" aria-selected="false">
+      <span class="mode-n">04</span><span class="mode-on">Prikazano</span>
+      <svg class="mode-g" viewBox="0 0 132 64" aria-hidden="true"><path d="M30 56a36 36 0 0 1 72 0M42 56a24 24 0 0 1 48 0M54 56a12 12 0 0 1 24 0M20 56h92"/><path d="M66 8V20" stroke-dasharray="2 3"/><circle cx="34" cy="38" r="3"/><circle cx="44" cy="26" r="3"/><circle cx="57" cy="22" r="3"/><circle cx="48" cy="40" r="3"/></svg>
+      <span class="mode-t">Skupština</span>
+      <span class="mode-d">Novi saziv: ko sedi u sali, koliko glasova treba za šta i šta sledi do izbora Vlade.</span>
     </button>
   </div>
 </section>
@@ -125,12 +132,14 @@
 <script src="data/dopune.js"></script>
 <script src="data/ljudi.js"></script>
 <script src="data/lokalno.js"></script>
+<script src="data/poslanici.js"></script>
 <script src="data/mehanizmi.js"></script>
 <script src="data/slike.js"></script>
 <script src="js/shared.js"></script>
 <script src="js/lanac.js"></script>
 <script src="js/nadredjenost.js"></script>
 <script src="js/nivoi.js"></script>
+<script src="js/skupstina.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
