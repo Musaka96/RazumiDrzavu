@@ -17,6 +17,10 @@ const HIER={
     {b:"exe",n:"Izvršna vlast",d:"Ministarstva i službe rade u sastavu Vlade ili pod njenim nadzorom.",head:[["predsednik","komanduje Vojskom"]],
      tree:{id:"vlada",kids:[
        {id:"minpravde",sub:["Uprava za izvršenje krivičnih sankcija (zatvori)"]},
+       {id:"msp",sub:["Ambasade i konzulati (diplomatsko-konzularna predstavništva)"]},
+       {id:"minfin",sub:["Poreska uprava","Uprava carina","Uprava za trezor","Uprava za sprečavanje pranja novca"]},
+       {id:"mduls",sub:["Upravni inspektorat","Jedinstveni birački spisak"]},
+       {id:"mei"},{id:"mit"},{id:"prosveta"},{id:"mgsi"},{id:"minkult"},{id:"ministarstva"},
        {id:"mup",sub:["Direkcija policije","Uprava kriminalističke policije (UKP)","Specijalna antiteroristička jedinica (SAJ)"]},
        {id:"vojska",sub:["Ministarstvo odbrane","Generalštab Vojske Srbije","Vojnobezbednosna agencija (VBA)","Vojnoobaveštajna agencija (VOA)"]},
        {id:"bia"}]}}
@@ -32,6 +36,7 @@ const HIER_INFO={
   "vjt>tuzilastva":"Hijerarhija ide od Vrhovnog preko apelacionih i viših do osnovnih tužilaštava; viši tužilac može davati uputstva nižem.",
   "tuzilastva>vjtbg":"Više javno tužilaštvo u Beogradu je deo mreže viših tužilaštava; nad njim je Apelaciono javno tužilaštvo u Beogradu, a od oktobra 2026. ga kontroliše komisija Vrhovnog javnog tužilaštva.",
   "vlada>minpravde":"Ministarstvo pravde je organ državne uprave u sastavu Vlade; ministar odgovara Vladi i Skupštini.",
+  "vlada>msp":"Ministarstvo spoljnih poslova je u sastavu Vlade; ambasade i konzulati su njegova predstavništva u inostranstvu.",
   "vlada>mup":"MUP je ministarstvo u sastavu Vlade; Vlada postavlja direktora policije.",
   "vlada>vojska":"Ministarstvo odbrane je u sastavu Vlade, a Vojska u sastavu Ministarstva odbrane.",
   "vlada>bia":"BIA je samostalna služba čiji rad usmerava Vlada; Vlada postavlja i razrešava direktora."
@@ -40,7 +45,7 @@ const HIER_INFO={
 const HIER_CROSS=[
   ["vss","vrhovni","bira sudije"],["vss","apelacioni","bira sudije"],["vss","upravni","bira sudije"],["vss","osnovni","bira sudije"],
   ["vst","vjt","predlaže Skupštini kandidata"],["vst","tok","bira tužioce"],["vst","tuzrz","bira tužioce"],["vst","tuzilastva","bira tužioce"],["vst","vjtbg","bira tužioce"],
-  ["predsednik","vojska","komanduje Vojskom"],["minpravde","vst","ministar je član VST"],
+  ["predsednik","vojska","komanduje Vojskom"],["minpravde","vst","ministar je član VST"],["predsednik","msp","postavlja ambasadore"],
   ["tok","mup","rukovodi istragom"],["vjtbg","mup","rukovodi istragom"],["tuzilastva","mup","rukovodi istragom"],
   ["tok","osnovni","podiže optužnice pred posebnim odeljenjima"],["tuzilastva","osnovni","podiže optužnice"],["vjtbg","osnovni","podiže optužnice"],
   ["ustavni","vrhovni","ocenjuje ustavnost; ustavne žalbe protiv sudskih odluka"],["ustavni","vlada","ocenjuje ustavnost propisa Vlade"],["ustavni","vjt","ustavne žalbe protiv akata organa"]

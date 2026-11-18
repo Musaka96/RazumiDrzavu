@@ -11,7 +11,7 @@ const LEGIT=[
 ["skupstina","rik","bira stalni sastav"],["skupstina","nbs","bira guvernera"],
  ["skupstina","rem","bira Savet"],["skupstina","acas","bira Odbor agencije"],["skupstina","ombudsman","bira"],["skupstina","poverenik","bira"],
  ["skupstina","ravnopravnost","bira"],["skupstina","dri","bira Savet"],
- ["vlada","minpravde","ministar je član Vlade"],["vlada","mup","ministar je član Vlade; postavlja direktora policije"],["vlada","bia","postavlja direktora"],
+ ["vlada","minpravde","ministar je član Vlade"],["vlada","msp","ministar je član Vlade"],["vlada","minfin","ministar je član Vlade"],["vlada","mduls","ministar je član Vlade"],["vlada","mei","ministar je član Vlade"],["vlada","mit","ministar je član Vlade"],["vlada","prosveta","ministar je član Vlade"],["vlada","mgsi","ministar je član Vlade"],["vlada","minkult","ministar je član Vlade"],["vlada","ministarstva","ministri su članovi Vlade"],["vlada","mup","ministar je član Vlade; postavlja direktora policije"],["vlada","bia","postavlja direktora"],
  ["vlada","vojska","ministar odbrane je član Vlade"],["predsednik","vojska","komanduje Vojskom; postavlja generale"],
  ["vss","vrhovni","bira sudije"],["vss","apelacioni","bira sudije"],["vss","upravni","bira sudije"],["vss","osnovni","bira sudije"],
  ["vst","tok","bira tužioce"],["vst","vjtbg","bira tužioce"],["vst","tuzilastva","bira tužioce"],["vst","tuzrz","bira tužioce"],

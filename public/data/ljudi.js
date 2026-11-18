@@ -10,6 +10,13 @@ const PEOPLE=[
  {id:"nenadic",n:"Mladen Nenadić",m:`Nenadić${L}{0,3}`,room:"tok",role:"Glavni tužilac za organizovani kriminal.",desc:"Rukovodi TOK-om, koji vodi slučajeve pruge, nadstrešnice, Alta banke i prijave protiv direktora BIA i ministra pravde."},
  {id:"stefanovic",n:"Nenad Stefanović",m:`(?<!Aleksandr${L}\\s)Stefanović${L}{0,3}`,room:"vjtbg",role:"Glavni tužilac Višeg javnog tužilaštva u Beogradu.",desc:"Komisija Vrhovnog javnog tužilaštva navodi sumnju da je uspostavio „paratužilački sistem“; on je podneo prijavu protiv predsednika komisije."},
  {id:"orlic",n:"Vladimir Orlić",m:`Orlić${L}{0,3}`,room:"bia",role:"Direktor BIA; potpredsednik SNS.",desc:"TOK je 5. 11. 2026. formirao predmet po prijavi koja ga tereti za pritisak na zaposlene tokom izbora. Optužnice nema."},
+ {id:"mali",n:"Siniša Mali",m:`Siniš${L}{0,2}\\sMal${L}{1,2}`,room:"minfin",role:"Prvi potpredsednik Vlade i ministar finansija, tehnički mandat.",desc:"Ministar finansija od 2018. Nije bio na izbornoj listi SNS 2026. Mesto beogradskog odbornika napustio je u novembru 2026, posle rešenja Agencije za sprečavanje korupcije o nespojivosti funkcija."},
+ {id:"paunovic",n:"Snežana Paunović",m:`Snežan${L}{0,2}\\sPaunović`,room:"mduls",role:"Ministarka državne uprave i lokalne samouprave, tehnički mandat (SPS).",desc:"Ministarka od 16. 4. 2025."},
+ {id:"starovic",n:"Nemanja Starović",m:`Starović${L}{0,3}`,room:"mei",role:"Ministar za evropske integracije, tehnički mandat (SNS).",desc:"Ministar od 16. 4. 2025."},
+ {id:"bratina",n:"Boris Bratina",m:`Bratin${L}{1,2}`,room:"mit",role:"Ministar informisanja i telekomunikacija, tehnički mandat.",desc:"Ministar od 16. 4. 2025."},
+ {id:"vukstankovic",n:"Dejan Vuk Stanković",m:`Vuk${L}{0,2}\\sStanković${L}{0,3}`,room:"prosveta",role:"Ministar prosvete, tehnički mandat.",desc:"Ministar od 16. 4. 2025. U aprilu 2026. rektorat je tražio njegovu ostavku."},
+ {id:"sofronijevic",n:"Aleksandra Sofronijević",m:`Sofronijević`,room:"mgsi",role:"Ministarka građevinarstva, saobraćaja i infrastrukture, tehnički mandat.",desc:"Ministarka od 16. 4. 2025."},
+ {id:"djuric",n:"Marko Đurić",m:`(?<!Nemanj${L}{1,2}\\s)Đurić${L}{0,3}`,room:"msp",role:"Ministar spoljnih poslova, tehnički mandat.",desc:"Ministar od maja 2024; zadržao je resor u Vladi Đura Macuta (april 2025)."},
  {id:"vujic",n:"Nenad Vujić",m:`Vujić${L}{0,3}`,room:"minpravde",role:"Ministar pravde, tehnički mandat.",desc:"TOK je formirao predmet po prijavi koja tereti njega i rukovodstvo zatvorske uprave za pritisak na glasanje u zatvorima. Optužnice nema."},
  {id:"dacic",n:"Ivica Dačić",m:`Dačić${L}{0,3}`,room:"mup",role:"Ministar unutrašnjih poslova, tehnički mandat.",desc:"Ministar policije od maja 2024; zadržan u Vladi Đura Macuta."},
  {id:"vasiljevic",n:"Dragan Vasiljević",m:`Vasiljević${L}{0,3}`,room:"mup",role:"Direktor policije.",desc:"Postavljen 30. 4. 2025. Studentska lista je 29. 10. 2026. tražila njegovu ostavku."},
@@ -60,6 +67,14 @@ const PEOPLE=[
 
 /* Nazivi institucija u tekstu → prostorija */
 const ALIASES=[
+ ["mduls",`Ministarstv${L}{1,3}\\sdržavne\\suprave(?:\\si\\slokalne\\ssamouprave)?`],
+ ["minfin",`Ministarstv${L}{1,3}\\sfinansija`],
+ ["mei",`Ministarstv${L}{1,3}\\sza\\sevropske\\sintegracije`],
+ ["mit",`Ministarstv${L}{1,3}\\sinformisanja(?:\\si\\stelekomunikacija)?`],
+ ["prosveta",`Ministarstv${L}{1,3}\\sprosvete`],
+ ["mgsi",`Ministarstv${L}{1,3}\\sgrađevinarstva(?:,\\ssaobraćaja\\si\\sinfrastrukture)?`],
+ ["minkult",`Ministarstv${L}{1,3}\\skulture`],
+ ["msp",`Ministarstv${L}{1,3}\\sspoljnih\\sposlova`],
  ["lokalna",`Skupštin${L}{1,3}\\sgrada\\sBeograda|Skupštin${L}{1,3}\\sAPV|AP\\sVojvodin${L}{1,2}|Pokrajinsk${L}{1,3}\\svlad${L}{1,2}`],
  ["skupstina",`Narodn${L}{1,3}\\sskupštin${L}{1,3}|Skupštin${L}{1,3}`],
  ["predsednik",`predsednik${L}{0,3}\\sRepublike`],
