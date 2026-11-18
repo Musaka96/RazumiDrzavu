@@ -29,7 +29,7 @@ const PEOPLE=[
  {id:"mrdic",n:"Uglješa Mrdić",m:`Mrdić${L}{0,5}`,room:"skupstina",role:"Poslanik SNS.",desc:"Predlagač izmena pet pravosudnih zakona („Mrdićevi zakoni“) iz decembra 2025."},
  {id:"vesic",n:"Goran Vesić",m:`Vesić${L}{0,3}`,room:"osnovni",role:"Bivši ministar građevinarstva.",desc:"Okrivljen u slučaju nadstrešnice i osumnjičen u slučaju pruge Novi Sad–Kelebija. Suđenje nije počelo."},
  {id:"momirovic",n:"Tomislav Momirović",m:`Momirović${L}{0,3}`,room:"tok",role:"Bivši ministar.",desc:"Osumnjičen u slučaju pruge Novi Sad–Kelebija (TOK, avgust 2025)."},
- {id:"selakovic",n:"Nikola Selaković",m:`Selaković${L}{0,3}`,room:"osnovni",role:"Ministar kulture; izabran za poslanika na listi SNS.",desc:"Optužen u slučaju „Generalštab“; suđenje je počelo 4. 2. 2026."},
+ {id:"selakovic",n:"Nikola Selaković",m:`Selaković${L}{0,3}`,room:"osnovni",role:"Narodni poslanik (lista SNS); prema sajtu Vlade i dalje ministar kulture.",desc:"Optužen u slučaju „Generalštab“; suđenje je počelo 4. 2. 2026."},
  {id:"macura",n:"Davor Macura",m:`Macur${L}{1,2}`,room:"tok",role:"Vlasnik Alta banke.",desc:"Uhapšen po nalogu TOK-a 2. 11. 2026, u pritvoru do 30 dana; TOK mu je zabranio raspolaganje imovinom."},
  {id:"basta",n:"Rade Basta",m:`Bast(?:a|e|i|u|om)`,room:"vjtbg",role:"Bivši ministar privrede.",desc:"Uhapšen 11. 11. 2026. zbog sumnje na neosnovane donacije dok je bio direktor Beogradskih elektrana."},
  {id:"kricak",n:"Marko Kričak",m:`Kričak${L}{0,2}`,room:"mup",role:"Bivši načelnik Uprave kriminalističke policije.",desc:"Uhapšen 1. 11. 2026. zbog sumnje na zloupotrebu položaja u istrazi ubistva na Senjaku."},
