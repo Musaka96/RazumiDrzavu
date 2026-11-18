@@ -53,7 +53,7 @@ const PEOPLE=[
  {id:"ninic",n:"Ivan Ninić",m:`Ninić${L}{0,3}`,room:"tok",role:"Advokat.",desc:"Podneo prijave na osnovu kojih je TOK formirao predmete protiv direktora BIA i ministra pravde."},
  {id:"grcic",n:"Manja Grčić",m:`Grčić`,room:"javniservis",role:"Bivša generalna direktorka RTS-a.",desc:"Podnela ostavku 28. 10. 2026."},
  {id:"karadzic",n:"Goran Karadžić",m:`Goran${L}{0,2}\\sKaradžić${L}{0,3}`,room:"javniservis",role:"Bivši generalni direktor RTV-a.",desc:"Podneo ostavku 30. 10. 2026."},
- {id:"zukorlic",n:"Usame Zukorlić",m:`Zukorlić${L}{0,3}`,room:"skupstina",role:"Nosilac liste SPP.",desc:"Njegova lista dobila je jedan mandat posle ponovljenog glasanja 1. 11. 2026."},
+ {id:"zukorlic",n:"Usame Zukorlić",m:`Zukorlić${L}{0,3}`,room:"skupstina",role:"Narodni poslanik, nosilac liste SPP; prema sajtu Vlade i dalje ministar bez portfelja.",desc:"Njegova lista dobila je jedan mandat posle ponovljenog glasanja 1. 11. 2026; zakletvu je položio 17. 11. Ministar bez portfelja od 2024. Ustav (čl. 102) ne dozvoljava narodnom poslaniku funkciju u izvršnoj vlasti, pa je njegov status u Vladi nerazjašnjen."},
  {id:"samardzic",n:"Miloš Samardžić",m:`Samardžić${L}{0,3}`,room:"tuzrz",role:"V.d. glavnog tužioca za ratne zločine.",desc:"Postavljen 31. 10. 2026. (prema saopštenju tužilaštva)."},
  {id:"stanojkovic",n:"Snežana Stanojković",m:`Stanojković`,room:"tuzrz",role:"Bivša glavna tužiteljka za ratne zločine.",desc:"Saslušana u TOK-u 22. 9. 2026. zbog navodne zloupotrebe službene kartice; odbacuje navode."},
  {id:"damnjanovic",n:"Dejan Damnjanović",m:`Damnjanović${L}{0,3}`,room:"acas",role:"Direktor Agencije za sprečavanje korupcije.",desc:"Izabran 27. 2. 2023."},

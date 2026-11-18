@@ -69,7 +69,7 @@ const MP_LIST=[
   g:"alb",party:"PDD",fn:null,prev:[["skupstina","Narodni poslanik u prethodnom sazivu"]],u:1,s:[_S.mondo,_S.kurir]},
  {id:"mehmeti",n:"Visar Mehmeti",m:`Mehmeti${L}{0,2}`,role:"Poslanik Albanske koalicije.",desc:"Predstavnik Alternative za promene iz Preševa.",
   g:"alb",party:"Alternativa za promene",fn:null,prev:[],u:1,s:[_S.mondo,_S.kurir]},
- {id:"zukorlic",g:"spp",party:"SPP",fn:null,prev:[["skupstina","Narodni poslanik od 2022."]],s:[_S.danas,_S.n1]},
+ {id:"zukorlic",g:"spp",party:"SPP",fn:null,prev:[["ministarstva","Ministar bez portfelja od 2024; status posle 17. 11. 2026. nerazjašnjen"],["skupstina","Narodni poslanik od 2022."]],s:[_S.danas,_S.n1,["CRTA, spisak 250 poslanika","https://crta.plus/updates/new-national-assembly-list-of-250-mps-2026/"],["Sandžakpress (Naslovi)","https://naslovi.net/2026-11-17/sandzakpress/zukorlic-prisustvovao-konstituisanju-novog-saziva-narodne-skupstine-srbije/42616512"]]},
  {id:"skrijelj",n:"Ahmedin Škrijelj",m:`Škrijelj${L}{0,3}`,role:"Nosilac liste SDA Sandžaka.",desc:"Predstavljao je listu na konsultacijama pred konstitutivnu sednicu.",
   g:"sda",party:"SDA Sandžaka",fn:null,prev:[],u:1,s:[_S.mondo,_S.kons]}
 ];
