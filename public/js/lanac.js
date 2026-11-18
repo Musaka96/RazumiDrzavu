@@ -62,7 +62,7 @@ const Lanac={
     const tiers=[];Object.keys(INST).forEach(id=>{const t=TIER[id];if(t==null)return;(tiers[t]=tiers[t]||[]).push(id)});
     const outside=Object.keys(INST).filter(id=>TIER[id]==null);
     const card=id=>{const it=INST[id];return `<button class="card" data-id="${id}" data-b="${it.b}" style="--wc:${bc(it.b)}" aria-label="${esc(it.n)}">
-      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span></button>`};
+      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span>${emBadge(id)}</button>`};
     const groups=ids=>BR_ORDER.filter(b=>ids.some(id=>INST[id].b===b)).map(b=>`<div class="grp" style="--wc:${bc(b)}"><span class="grp-l">${esc(BR[b].n)}</span><div class="cards">${ids.filter(id=>INST[id].b===b).map(card).join("")}</div></div>`).join("");
     let h=`<div class="lanac" id="lanac"><svg class="edges" aria-hidden="true"></svg>`;
     tiers.forEach((ids,t)=>{h+=`<section class="tier" data-tier="${t}"><header class="tier-h"><span class="tier-n">${t===0?"Polazište":"Nivo "+t}</span><h3>${esc(TIER_INFO[t].n)}</h3><p>${esc(TIER_INFO[t].d)}</p></header><div class="tier-b">${groups(ids)}</div></section>`});

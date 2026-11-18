@@ -48,6 +48,19 @@ const ICO={
 };
 const icoSvg=(id,size)=>`<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><path d="${ICO[id]||""}"/></svg>`;
 
+/* ---------- Slike (IMG iz slike.js): portreti i grbovi ---------- */
+const imgP=id=>typeof IMG!=="undefined"&&IMG.p[id]||null;
+const imgI=id=>typeof IMG!=="undefined"&&IMG.i[id]||null;
+/* Mali grb u uglu prostorije na mapi; ukrasni, pa alt="" */
+const emBadge=id=>{const x=imgI(id);return x?`<img class="c-em" src="${esc(x.f)}" alt="" onerror="this.remove()" loading="lazy" decoding="async">`:""};
+/* Inicijali za osobu bez portreta */
+const initials=n=>n.split(/\s+/).filter(w=>/^\p{L}/u.test(w)).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+/* Okrugli portret ili inicijali; boja dolazi od --wc roditelja */
+const avatar=(id,size)=>{const P=PBY[id],x=imgP(id);
+  return x?`<img class="av" src="${esc(x.f)}" alt="" onerror="this.style.visibility='hidden'" width="${size}" height="${size}" loading="lazy" decoding="async">`:`<span class="av av-i" aria-hidden="true" style="width:${size}px;height:${size}px">${esc(initials(P.n))}</span>`};
+/* Navod autora i licence ispod slike u panelu */
+const credit=(x,l)=>`<p class="credit">${l}: <a class="nt" href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.a)}</a>, <span class="nt">${esc(x.l)}</span></p>`;
+
 /* ---------- Putanje: kako funkcioniše ---------- */
 const PATHS=[
  {id:"vlada-nastaje",view:"lanac",n:"Kako nastaje Vlada",steps:[

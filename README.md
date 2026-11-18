@@ -24,6 +24,10 @@ public/
     ljudi.js            ljudi (PEOPLE) i nazivi institucija (ALIASES) koji se prepoznaju u tekstu
     lokalno.js          pokrajina, Beograd, gradovi i opštine; zamenjuje staru zajedničku instituciju „lokalna“
     mehanizmi.js        mehanizmi (MECH): koraci, ishodi, kontrola i vesti u kojima su korišćeni
+    slike.js            portreti (IMG.p, po id osobe) i grbovi/znakovi (IMG.i, po id institucije), sa autorom, licencom i linkom na Commons
+  img/
+    ljudi/              portreti sa Wikimedia Commons (male sličice)
+    grbovi/             grbovi i znakovi; _srbija.png je mali grb Srbije za organe bez sopstvenog znaka
 scripts/build.mjs       provera sintakse i pravljenje dist/artifact.html (za Claude artifakt)
 vercel.json             Vercel služi folder public/
 ```
@@ -80,4 +84,4 @@ Mehanizmi (hapšenje, pritvor, pomilovanje, mere REM-a…) su u `public/data/meh
 
 ## Napomena
 
-Nezavisan, nezvaničan pregled. Ne koristi zvanične grbove ni znakove institucija; piktogrami su nacrtani za ovu šemu. Krivične prijave i istrage nisu presude.
+Nezavisan, nezvaničan pregled. Grbovi, znakovi institucija i portreti (`public/img/`) preuzeti su sa Wikimedia Commons, pod slobodnim licencama ili kao javno dobro; autor, licenca i link na fajl su u `public/data/slike.js` i prikazuju se ispod svake slike. Piktogrami su nacrtani za ovu šemu. Krivične prijave i istrage nisu presude.

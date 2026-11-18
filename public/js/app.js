@@ -137,7 +137,8 @@ function renderPanel(){
   }else if(mode.t==="room"){
     const id=mode.id,it=INST[id],rels=relsOf(id),evs=evFor(id),ppl=peopleIn(id),tab=mode.tab||"pregled";wc=bc(it.b);
     const chain=chainToVoters(id),mechs=mechOf(id);
-    h=`<div class="ph"><div class="ico">${icoSvg(id,26)}</div><div><span class="lbl">${esc(BR[it.b].n)}</span><h2>${esc(it.n)}</h2></div></div>`;
+    const em=imgI(id);
+    h=`<div class="ph${em?" ph-em":""}"><div class="ico">${icoSvg(id,26)}</div><div><span class="lbl">${esc(BR[it.b].n)}</span><h2>${esc(it.n)}</h2></div>${em?`<img class="em" src="${esc(em.f)}" onerror="this.remove()" alt="${esc("Grb ili znak: "+it.n)}">${credit(em,"Grb")}`:""}</div>`;
     h+=tabsHtml([["pregled","Pregled"],["veze","Veze",rels.length],["mehanizmi","Mehanizmi",mechs.length],["vesti","Vesti",evs.length],["ljudi","Ljudi",ppl.length]],tab);
     if(tab==="pregled"){
       const recent=mechs.map(x=>({m:x.m,d:(x.ev.find(inScope)||{}).d})).filter(x=>x.d).sort((a,b)=>b.d.localeCompare(a.d));
@@ -156,11 +157,12 @@ function renderPanel(){
     }else if(tab==="vesti"){
       h+=`<div class="vbar">${periodSeg()}</div>${newsList(evs,id)}`;
     }else if(tab==="ljudi"){
-      h+=ppl.length?`<ul class="pl">${ppl.map(x=>`<li><button class="lk" data-person="${x.id}">${esc(x.n)}</button><span>${esc(x.role)}</span><span class="muted">${evForPerson(x.id).length} vesti</span></li>`).join("")}</ul>`:`<p class="muted">Nema zabeleženih osoba za ovu instituciju.</p>`;
+      h+=ppl.length?`<ul class="pl">${ppl.map(x=>`<li>${avatar(x.id,28)}<button class="lk" data-person="${x.id}">${esc(x.n)}</button><span>${esc(x.role)}</span><span class="muted">${evForPerson(x.id).length} vesti</span></li>`).join("")}</ul>`:`<p class="muted">Nema zabeleženih osoba za ovu instituciju.</p>`;
     }
   }else if(mode.t==="person"){
     const P=PBY[mode.id],evs=evForPerson(mode.id),tab=mode.tab||"pregled";wc=bc(INST[P.room].b);
-    h=`<div class="ph"><div class="ico">${icoSvg(P.room,26)}</div><div><span class="lbl">Osoba</span><h2>${esc(P.n)}</h2></div></div>`;
+    const ph=imgP(P.id);
+    h=`<div class="ph${ph?" ph-p":""}">${ph?`<img class="pic" src="${esc(ph.f)}" onerror="this.style.visibility='hidden'" alt="${esc(P.n)}" width="56" height="56">`:`<div class="ico">${icoSvg(P.room,26)}</div>`}<div><span class="lbl">Osoba</span><h2>${esc(P.n)}</h2></div>${ph?credit(ph,"Foto"):""}</div>`;
     h+=tabsHtml([["pregled","Pregled"],["vesti","Vesti",evs.length]],tab);
     if(tab==="pregled")h+=`<p><strong>${esc(P.role)}</strong></p><p>${linkify(esc(P.desc),"p:"+P.id)}</p><dl><dt>Institucija</dt><dd><button class="lk" data-room="${P.room}">${esc(INST[P.room].n)}</button></dd></dl>
       ${evs.length?`<div class="sec"><span class="lbl">Najnovije</span>${itemHtml(evs[0],"p:"+P.id)}${evs.length>1?`<button class="lk" data-tab="vesti">Sve vesti (${evs.length})</button>`:""}</div>`:""}`;
@@ -210,7 +212,7 @@ function syncMenus(){
 const norm=s=>s.toLowerCase().replace(/đ/g,"dj").normalize("NFD").replace(/[̀-ͯ]/g,"");
 const SIDX=[
   ...Object.keys(INST).map(id=>({k:"i",id,l:INST[id].n,s:BR[INST[id].b].n,h:norm(INST[id].n+" "+INST[id].p+" "+INST[id].head)})),
-  ...PEOPLE.map(p=>({k:"p",id:p.id,l:p.n,s:p.role,h:norm(p.n)})),
+  ...PEOPLE.map(p=>({k:"p",id:p.id,l:p.n,s:p.role,h:norm(p.n),b:INST[p.room].b})),
   ...MECH.map(m=>({k:"m",id:m.id,l:m.n,s:"Mehanizam · "+BR[m.b].n,h:norm(m.n+" "+m.sum)})),
   ...EV.map((e,i)=>({k:"e",id:i,l:e.t,s:fmt(e.d),h:norm(e.t+" "+e.x),d:e.d}))
 ];
@@ -221,7 +223,7 @@ function runSearch(q){
   const words=n.split(/\s+/),match=x=>words.every(w=>x.h.includes(w));
   const I=SIDX.filter(x=>x.k==="i"&&match(x)).slice(0,5),P=SIDX.filter(x=>x.k==="p"&&match(x)).slice(0,5),M=SIDX.filter(x=>x.k==="m"&&match(x)).slice(0,4),E=SIDX.filter(x=>x.k==="e"&&match(x)).sort((a,b)=>b.d.localeCompare(a.d)).slice(0,6);
   qHits=[...I,...P,...M,...E];qSel=0;
-  const grp=(n,a)=>a.length?`<div class="qg">${n}</div>`+a.map(x=>`<button class="qi" role="option" data-qi="${qHits.indexOf(x)}"><span class="ql">${esc(x.l)}</span><span class="qs">${esc(x.s)}</span></button>`).join(""):"";
+  const grp=(n,a)=>a.length?`<div class="qg">${n}</div>`+a.map(x=>`<button class="qi${x.k==="p"?" qp":""}" role="option" data-qi="${qHits.indexOf(x)}"${x.k==="p"?` style="--wc:${bc(x.b)}"`:""}>${x.k==="p"?avatar(x.id,24):""}<span class="ql">${esc(x.l)}</span><span class="qs">${esc(x.s)}</span></button>`).join(""):"";
   box.innerHTML=qHits.length?grp("Institucije",I)+grp("Ljudi",P)+grp("Mehanizmi",M)+grp("Vesti",E):`<div class="qe">Nema rezultata za „${esc(q)}“.</div>`;
   box.hidden=false;markQ();applyScript(box);
   box.querySelectorAll("[data-qi]").forEach(b=>b.addEventListener("mousedown",ev=>{ev.preventDefault();pickQ(+b.dataset.qi)}));

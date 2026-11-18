@@ -39,7 +39,7 @@ const Niv={
   el:null,svg:null,
   render(stage){
     const card=id=>{const it=INST[id];if(!it)return"";return `<button class="card lcard" data-id="${id}" data-b="${it.b}" style="--wc:${bc(it.b)}" aria-label="${esc(it.n)}">
-      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span></button>`};
+      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span>${emBadge(id)}</button>`};
     let h=`<div class="niv" id="niv"><svg class="edges" aria-hidden="true"></svg><div class="hnote" id="nnote" hidden></div>`;
     h+=`<div class="nrow nhead"><span></span><span class="lbl">Predstavničko telo</span><span class="lbl">Izvršni organ</span></div>`;
     h+=`<section class="nrow nvoters"><header class="tier-h"><span class="tier-n">Polazište</span><h3>Građani</h3><p>Biraju predstavnička tela na svakom nivou; izvršne organe biraju ta tela.</p></header><div class="ncell">${card("gradjani")}</div><div class="ncell"></div></section>`;

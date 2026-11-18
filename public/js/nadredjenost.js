@@ -65,7 +65,7 @@ const Nad={
   el:null,svg:null,open:new Set(),
   render(stage){
     const card=(id,extra)=>{const it=INST[id];return `<button class="card hcard" data-id="${id}" data-b="${it.b}" style="--wc:${bc(it.b)}" aria-label="${esc(it.n)}">
-      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span></button>${extra||""}`};
+      <span class="c-ico">${icoSvg(id,20)}</span><span class="c-txt"><span class="c-n">${esc(it.p)}</span><span class="c-s">${esc(it.short)}</span></span><span class="c-b" data-badge="${id}"></span><span class="c-step" data-step="${id}"></span>${emBadge(id)}</button>${extra||""}`};
     const node=(n,depth)=>{
       const sub=n.sub?`<button class="hsub-t" data-sub="${n.id}" aria-expanded="${this.open.has(n.id)}">${this.open.has(n.id)?"Sakrij":"Prikaži"} unutrašnje jedinice (${n.sub.length})</button><ul class="hsub" ${this.open.has(n.id)?"":"hidden"}>${n.sub.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`:"";
       return `<li class="hn" style="--d:${depth}">${card(n.id,sub)}${n.kids?`<ul class="hk">${n.kids.map(k=>node(k,depth+1)).join("")}</ul>`:""}</li>`;
