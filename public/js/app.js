@@ -17,10 +17,10 @@ const VIEWS={
 
 /* Trenutno stanje: četiri ključne tačke za svaki prikaz; klik otvara instituciju */
 const STATE={
-  lanac:[["predsednik","Predsednik Republike","Ana Brnabić, v.d.","Izbori: raspisivanje do 27. 11, glasanje do 27. 12."],["skupstina","Narodna skupština","140 · 103 · 7","Konstituisana 17. 11; predsednik Skupštine još nije izabran"],["vlada","Vlada","Đuro Macut","Tehnički mandat; nova vlada do 15. 2. 2027."],["vjt","Vrhovno javno tužilaštvo","Zagorka Dolovac","Komisija kontroliše VJT u Beogradu"]],
+  lanac:[["predsednik","Predsednik Republike","Aleksandar Čupić, v.d.","Od 19. 11; izbori: raspisivanje do 27. 11, glasanje do 27. 12."],["skupstina","Narodna skupština","140 · 103 · 7","Predsednik Aleksandar Čupić, izabran 19. 11."],["vlada","Vlada","Đuro Macut","Tehnički mandat; nova vlada do 15. 2. 2027."],["vjt","Vrhovno javno tužilaštvo","Zagorka Dolovac","Komisija kontroliše VJT u Beogradu"]],
   nadredjenost:[["ustavni","Ustavni sud · iznad svih","Vladan Petrov","Ocenjuje zakone i odluke svih organa"],["vrhovni","Vrhovni sud · vrh sudova","Miroljub Tomić","Predsednik od 1. 7. 2026."],["vjt","Vrhovno javno tužilaštvo · vrh tužilaštava","Zagorka Dolovac","VST i dalje bez izabranog predsednika"],["vlada","Vlada · vrh izvršne vlasti","Đuro Macut","Tehnički mandat; ministarstva, MUP i BIA"]],
   nivoi:[["skupstina","Republika","140 · 103 · 7","Narodna skupština konstituisana 17. 11."],["vladaapv","AP Vojvodina","Maja Gojković","Pokrajinska vlada; Skupština: B. Juhas"],["gradonacelnik","Grad Beograd","Aleksandar Šapić","Gradonačelnik; Skupština grada: N. Nikodijević"],["opstine","Gradovi i opštine","Više od sto opština","Lokalni izbori u deset jedinica 29. 3. 2026."]],
-  skupstina:[["skupstina","Sastav","140 · 103 · 7","Studentska lista · lista SNS · manjine"],["skupstina","Predsednik Skupštine","Glasanje 19. 11.","A. Čupić ili S. Radenović; potrebno 126"],["studenti","Većina","140 od 250","Iznad 126; ispod tri petine (150)"],["vlada","Rok za Vladu","15. 2. 2027.","90 dana od konstituisanja"]]
+  skupstina:[["skupstina","Sastav","140 · 103 · 7","Studentska lista · lista SNS · manjine"],["skupstina","Predsednik Skupštine","Aleksandar Čupić","Izabran 19. 11. sa 140 glasova; i v.d. predsednika Republike"],["studenti","Većina","140 od 250","Iznad 126; ispod tri petine (150)"],["vlada","Rok za Vladu","15. 2. 2027.","90 dana od konstituisanja"]]
 };
 function renderState(anim){
   const el=$("#state");
@@ -146,6 +146,7 @@ function renderPanel(){
       const recent=mechs.map(x=>({m:x.m,d:(x.ev.find(inScope)||{}).d})).filter(x=>x.d).sort((a,b)=>b.d.localeCompare(a.d));
       h+=`<p>${linkify(esc(it.role),"i:"+id)}</p>
       <dl><dt>Sada</dt><dd>${linkify(esc(it.head),"i:"+id)}</dd><dt>Bira ga</dt><dd>${esc(it.chosen)}</dd><dt>Mandat</dt><dd>${esc(it.term)}</dd>${it.web?`<dt>Sajt</dt><dd><a href="${esc(it.web)}" target="_blank" rel="noopener">zvanični sajt ↗</a></dd>`:""}</dl>
+      ${it.parts?`<div class="sec"><span class="lbl">Ko čini ${esc(it.p)}</span><dl class="parts">${it.parts.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${linkify(esc(d),"i:"+id)}</dd>`).join("")}</dl></div>`:""}
       ${chain&&chain.length>1?`<div class="sec"><span class="lbl">Put do birača</span><ol class="chain">${chain.map(c=>`<li>${c===id?`<strong>${esc(INST[c].p)}</strong>`:`<button class="lk" data-room="${c}">${esc(INST[c].p)}</button>`}</li>`).join("")}</ol></div>`:""}
       ${recent.length?`<div class="sec"><span class="lbl">Nedavno korišćeni mehanizmi</span><div class="mhks">${recent.slice(0,4).map(x=>mhChip(x.m.id)).join("")}</div><button class="lk" data-tab="mehanizmi">Svi mehanizmi (${mechs.length})</button></div>`:""}
       ${evs.length?`<div class="sec"><span class="lbl">Najnovije</span>${evs.slice(0,2).map(e=>itemHtml(e,id)).join("")}${evs.length>2?`<button class="lk" data-tab="vesti">Sve vesti (${evs.length})</button>`:""}</div>`:""}`;

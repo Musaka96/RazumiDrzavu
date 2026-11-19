@@ -3,7 +3,7 @@
 const L="\\p{L}";
 const PEOPLE=[
  {id:"vucic",n:"Aleksandar Vučić",m:`Vučić${L}{0,3}`,room:"sns",role:"Nosilac liste SNS i šef njene poslaničke grupe; predsednik Republike 2017–2026.",desc:"Podneo ostavku 27. 9. 2026. da bi predvodio listu „Ujedinjena Srbija“ na vanrednim izborima; priznao poraz 25. 10. Od 17. 11. narodni poslanik i šef poslaničke grupe SNS."},
- {id:"brnabic",n:"Ana Brnabić",m:`Brnabić`,room:"skupstina",role:"Predsednica Narodne skupštine; v.d. predsednika Republike.",desc:"Vrši dužnost predsednika Republike od 28. 9. 2026. Zakazala je konstitutivnu sednicu nove Skupštine, održanu 17. 11."},
+ {id:"brnabic",n:"Ana Brnabić",m:`Brnabić`,room:"skupstina",role:"Narodna poslanica (SNS); predsednica Skupštine i v.d. predsednika Republike do 19. 11. 2026.",desc:"Dužnost predsednika Republike vršila je od 28. 9. 2026. Zakazala je konstitutivnu sednicu nove Skupštine; obe funkcije prestale su joj izborom Aleksandra Čupića 19. 11."},
  {id:"macut",n:"Đuro Macut",m:`Macut${L}{0,2}`,room:"vlada",role:"Predsednik Vlade, tehnički mandat.",desc:"Nestranački premijer od 16. 4. 2025. Njegova Vlada predložila je raspuštanje Skupštine 7. 9. 2026."},
  {id:"vucevic",n:"Miloš Vučević",m:`Vučević${L}{0,3}`,room:"vlada",role:"Predsednik SNS; bivši predsednik Vlade.",desc:"Podneo ostavku 28. 1. 2025, posle napada na studente u Novom Sadu."},
  {id:"dolovac",n:"Zagorka Dolovac",m:`Dolovac`,room:"vjt",role:"Vrhovna javna tužiteljka.",desc:"U oktobru 2026. izdala obavezno uputstvo za izborna krivična dela i formirala komisiju koja kontroliše VJT u Beogradu."},
@@ -18,7 +18,7 @@ const PEOPLE=[
  {id:"sofronijevic",n:"Aleksandra Sofronijević",m:`Sofronijević`,room:"mgsi",role:"Ministarka građevinarstva, saobraćaja i infrastrukture, tehnički mandat.",desc:"Ministarka od 16. 4. 2025."},
  {id:"djuric",n:"Marko Đurić",m:`(?<!Nemanj${L}{1,2}\\s)Đurić${L}{0,3}`,room:"msp",role:"Ministar spoljnih poslova, tehnički mandat.",desc:"Ministar od maja 2024; zadržao je resor u Vladi Đura Macuta (april 2025)."},
  {id:"vujic",n:"Nenad Vujić",m:`Vujić${L}{0,3}`,room:"minpravde",role:"Ministar pravde, tehnički mandat.",desc:"TOK je formirao predmet po prijavi koja tereti njega i rukovodstvo zatvorske uprave za pritisak na glasanje u zatvorima. Optužnice nema."},
- {id:"dacic",n:"Ivica Dačić",m:`Dačić${L}{0,3}`,room:"mup",role:"Ministar unutrašnjih poslova, tehnički mandat.",desc:"Ministar policije od maja 2024; zadržan u Vladi Đura Macuta."},
+ {id:"dacic",n:"Ivica Dačić",m:`Dačić${L}{0,3}`,room:"mup",role:"Potpredsednik Vlade i ministar unutrašnjih poslova, tehnički mandat.",desc:"Ministar policije od maja 2024; zadržan u Vladi Đura Macuta."},
  {id:"vasiljevic",n:"Dragan Vasiljević",m:`Vasiljević${L}{0,3}`,room:"mup",role:"Direktor policije.",desc:"Postavljen 30. 4. 2025. Studentska lista je 29. 10. 2026. tražila njegovu ostavku."},
  {id:"petrov",n:"Vladan Petrov",m:`Petrov${L}{0,2}`,room:"ustavni",role:"Predsednik Ustavnog suda.",desc:"Sudije su ga izabrale 22. 1. 2026. Studentska lista je tražila njegovu smenu."},
  {id:"tomic",n:"Miroljub Tomić",m:`Tomić${L}{0,3}`,room:"vrhovni",role:"Predsednik Vrhovnog suda.",desc:"Izabran 14. 5. 2026, na dužnosti od 1. 7. Pred njegovim sudom je zahtev za zaštitu zakonitosti u slučaju nadstrešnice."},

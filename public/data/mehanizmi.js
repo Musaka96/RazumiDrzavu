@@ -243,7 +243,7 @@ const MECH=[
    {a:"gradjani",w:"Građani",t:"Glasanje",d:"Predsednik se bira neposredno; ako niko ne dobije većinu glasalih, ide se u drugi krug."}],
   ends:[["Novi predsednik","Polaže zakletvu pred Skupštinom."]],
   checks:["Rokovi su ustavni; o sporovima oko njih može odlučivati Ustavni sud."],
-  ev:["Vučić podnosi ostavku","Ana Brnabić v.d. predsednika","Poslednji dan za raspisivanje predsedničkih izbora","Najkasniji dan glasanja za predsednika"]},
+  ev:["Vučić podnosi ostavku","Ana Brnabić v.d. predsednika","Čupić postao vršilac dužnosti","Poslednji dan za raspisivanje predsedničkih izbora","Najkasniji dan glasanja za predsednika"]},
 
  {id:"pomilovanje",n:"Pomilovanje i abolicija",b:"exe",inst:["predsednik","minpravde"],
   sum:"Predsednik Republike može osuđenom oprostiti ili ublažiti kaznu (pomilovanje), ili osloboditi od krivičnog gonjenja (abolicija); odluka ne mora da se obrazloži.",

@@ -1,4 +1,4 @@
-/* Poslanici novog saziva Narodne skupštine (konstituisan 17. 11. 2026) — ključna imena, uz izvore. Stanje: 18. 11. 2026, uveče; predsednik Skupštine još nije izabran.
+/* Poslanici novog saziva Narodne skupštine (konstituisan 17. 11. 2026) — ključna imena, uz izvore. Stanje: 19. 11. 2026; predsednik Skupštine izabran, potpredsednici još nisu.
    Unos: id (postojeća osoba iz ljudi.js ili nova), za novu osobu i n, m, role, desc;
    g = lista (sl, sns, svm, alb, sdp, sda, spp), party = stranka, fn = funkcija u Skupštini,
    prev = [[id institucije ili null, funkcija]], s = izvori, u:1 = nepotvrđeno (jedan izvor ili samo provladini/tabloidni mediji).
@@ -18,8 +18,8 @@ const MP_LIST=[
   g:"sl",party:"nestranački",fn:"Šef poslaničke grupe",prev:[],s:[_S.r021,_S.danas,_S.n1]},
  {id:"stimac",n:"Aleksandra Štimac",m:`Štimac`,role:"Zamenica šefa poslaničke grupe Studentske liste.",desc:"Najavila je da će Studentska lista predlog za predsednika Skupštine podneti pismeno.",
   g:"sl",party:"nestranački",fn:"Zamenica šefa poslaničke grupe",prev:[],u:1,s:[_S.r021,_S.mondo]},
- {id:"cupic",n:"Aleksandar Čupić",m:`Čupić${L}{0,3}`,role:"Kandidat Studentske liste za predsednika Skupštine.",desc:"Docent Saobraćajnog fakulteta u Beogradu, rođen 1978. u Prokuplju. Predlog je potpisalo svih 140 poslanika Studentske liste; podršku su najavili SVM i SPP.",
-  g:"sl",party:"nestranački",fn:"Kandidat za predsednika Skupštine",prev:[["studenti","Pregovarač na konsultacijama 13. 11. 2026."]],s:[["021.rs, ko je Čupić","https://www.021.rs/info/srbija/461600/ko-je-aleksandar-cupic-predsednik-skupstine-i-vd-predsednik-srbije"],_S.danas,_S.n1]},
+ {id:"cupic",n:"Aleksandar Čupić",m:`Čupić${L}{0,3}`,role:"Predsednik Narodne skupštine i v.d. predsednika Republike od 19. 11. 2026.",desc:"Docent Saobraćajnog fakulteta u Beogradu, rođen 1978. u Prokuplju. Izabran 19. 11. sa 140 glasova (Radenović 97); kao predsednik Skupštine vrši i dužnost predsednika Republike do izbora novog predsednika.",
+  g:"sl",party:"nestranački",fn:"Predsednik Skupštine; v.d. predsednika Republike",prev:[["predsednik","V.d. predsednika Republike od 19. 11. 2026."],["studenti","Pregovarač na konsultacijama 13. 11. 2026."]],s:[["Tanjug","https://tanjug.rs/srbija/politika/299059/aleksandar-cupic-izabran-za-predsednika-skupstine-srbije-predlozio-da-u-novom-sazivu-bude-sest-potpredsednika/vest"],["Danas","https://www.danas.rs/vesti/politika/aleksandar-cupic-izabran-za-predsednika-narodne-skupstine/"],["021.rs, ko je Čupić","https://www.021.rs/info/srbija/461600/ko-je-aleksandar-cupic-predsednik-skupstine-i-vd-predsednik-srbije"],_S.danas,_S.n1]},
  {id:"srdanovic",g:"sl",party:"nestranački",fn:"Nosilac liste",prev:[],s:[_S.r021,_S.danas]},
  {id:"reljanovic",n:"Mario Reljanović",m:`Reljanović${L}{0,3}`,role:"Poslanik Studentske liste.",desc:"Stručnjak za radno pravo. Predstavljao je Studentsku listu na konsultacijama pred konstitutivnu sednicu.",
   g:"sl",party:"nestranački",fn:null,prev:[["studenti","Pregovarač na konsultacijama 13. 11. 2026."]],u:1,s:[_S.kons,_S.mondo]},
@@ -30,7 +30,7 @@ const MP_LIST=[
  {id:"scepanovic",n:"Katarina Šćepanović",m:`Šćepanović${L}{0,3}`,role:"Poslanica Studentske liste.",desc:"Profesorka Filološke gimnazije, peta na listi. Pre sednice pominjana kao moguća predsednica Skupštine.",
   g:"sl",party:"nestranački",fn:null,prev:[],u:1,s:[_S.mondo,["Novosti","https://www.novosti.rs/vesti/politika/1671524/jos-zna-novi-celnik-parlamenta-konstitutivna-sednica-narodne-skupstine-zakazana-sutra-poznate-tacke-dnevnog-reda"]]},
  {id:"valentik",n:"Sara Valentik",m:`Valentik${L}{0,3}`,role:"Poslanica Studentske liste.",desc:"Najmlađa poslanica liste; na konstitutivnoj sednici pomaže predsedavajućem. Bakić je najavio da će biti potpredsednica Skupštine.",
-  g:"sl",party:"nestranački",fn:"Najavljena za potpredsednicu Skupštine",prev:[],u:1,s:[["SD.rs","https://www.sd.rs/vesti/info/jovo-bakic-otkrio-ko-ce-biti-potpredsednik-skupstine-srbije-2026-11-17"],_S.b92,_S.mondo]},
+  g:"sl",party:"nestranački",fn:"Kandidatkinja za potpredsednicu Skupštine",prev:[],s:[["B92, 19. 11.","https://www.b92.net/info/politika/286214/sednica-skupstine-srbije/vest"],["SD.rs","https://www.sd.rs/vesti/info/jovo-bakic-otkrio-ko-ce-biti-potpredsednik-skupstine-srbije-2026-11-17"],_S.b92,_S.mondo]},
  {id:"soskic",g:"sl",party:"nestranački",fn:null,prev:[["nbs","Guverner NBS 2010–2012."]],s:[_S.r021,["Wikipedia","https://sr.wikipedia.org/sr-el/Dejan_Šoškić"]]},
  {id:"hubac",n:"Željko Hubač",m:`Hubač${L}{0,3}`,role:"Poslanik Studentske liste.",desc:"Dramaturg, treći na listi. Govorio je u prilog kandidaturi Čupića.",
   g:"sl",party:"nestranački",fn:null,prev:[],s:[_S.danas,_S.kurir]},
@@ -42,9 +42,9 @@ const MP_LIST=[
   g:"sl",party:"nestranački",fn:null,prev:[],s:[_S.r021,_S.kurir]},
  /* Lista SNS */
  {id:"vucic",g:"sns",party:"SNS",fn:"Šef poslaničke grupe",prev:[["predsednik","Predsednik Republike 2017–2026."],["vlada","Predsednik Vlade 2014–2017."],["sns","Predsednik SNS 2012–2023."]],s:[_S.r021,_S.n1,_S.b92]},
- {id:"radenovic",g:"sns",party:"SNS",fn:"Predsedava sednicom kao najstariji poslanik; kandidat za predsednika Skupštine",prev:[["skupstina","Narodni poslanik od 2022."]],s:[_S.r021,_S.danas,["Novosti","https://www.novosti.rs/vesti/politika/1669218/stojan-radenovic-skupstina-srbije"]]},
- {id:"vucevic",g:"sns",party:"SNS",fn:null,prev:[["sns","Predsednik SNS od 2023."],["vlada","Predsednik Vlade 2024–2025."],["vojska","Ministar odbrane 2020–2024."],["gradovi","Gradonačelnik Novog Sada 2012–2022."]],s:[_S.danas,["Wikipedia","https://sr.wikipedia.org/sr-el/Miloš_Vučević"]]},
- {id:"brnabic",g:"sns",party:"SNS",fn:"Odlazeća predsednica Skupštine",prev:[["skupstina","Predsednica Narodne skupštine 2024–2026."],["vlada","Predsednica Vlade 2017–2024."],["predsednik","V.d. predsednika Republike od 28. 9. 2026."]],s:[_S.danas,_S.kons]},
+ {id:"radenovic",g:"sns",party:"SNS",fn:"Najstariji poslanik; protivkandidat Čupiću (97 glasova)",prev:[["skupstina","Narodni poslanik od 2022."]],s:[_S.r021,_S.danas,["Novosti","https://www.novosti.rs/vesti/politika/1669218/stojan-radenovic-skupstina-srbije"]]},
+ {id:"vucevic",g:"sns",party:"SNS",fn:"Kandidat SNS za potpredsednika Skupštine",prev:[["sns","Predsednik SNS od 2023."],["vlada","Predsednik Vlade 2024–2025."],["vojska","Ministar odbrane 2020–2024."],["gradovi","Gradonačelnik Novog Sada 2012–2022."]],s:[_S.danas,["Wikipedia","https://sr.wikipedia.org/sr-el/Miloš_Vučević"]]},
+ {id:"brnabic",g:"sns",party:"SNS",fn:null,prev:[["skupstina","Predsednica Narodne skupštine 2024–19. 11. 2026."],["vlada","Predsednica Vlade 2017–2024."],["predsednik","V.d. predsednika Republike 28. 9. – 19. 11. 2026."]],s:[_S.danas,_S.kons]},
  {id:"jovanov",n:"Milenko Jovanov",m:`Jovanov(?!ić)${L}{0,2}`,role:"Poslanik liste SNS.",desc:"Šesti na listi. Bio je pregovarač na konsultacijama i govorio u ime grupe u prilog Radenoviću.",
   g:"sns",party:"SNS",fn:null,prev:[["skupstina","Šef poslaničke grupe SNS u prethodnom sazivu"]],s:[_S.r021,_S.kons]},
  {id:"selakovic",n:"Nikola Selaković",m:`Selaković${L}{0,3}`,role:"Poslanik liste SNS; član Predsedništva SNS.",desc:"Sedmi na listi. Bio je ministar u više vlada. Ustav (čl. 102) ne dozvoljava narodnom poslaniku funkciju u izvršnoj vlasti; sajt Vlade ga i dalje navodi kao ministra.",
@@ -52,14 +52,14 @@ const MP_LIST=[
  {id:"mesarovic",n:"Adrijana Mesarović",m:`Mesarović${L}{0,3}`,role:"Narodna poslanica liste SNS; prema sajtu Vlade potpredsednica Vlade i ministarka privrede.",desc:"Šesnaesta na listi, iz Novog Sada. Ustav (čl. 102) ne dozvoljava narodnom poslaniku funkciju u izvršnoj vlasti; sajt Vlade je i dalje navodi kao ministarku.",
   g:"sns",party:"SNS",fn:null,prev:[["ministarstva","Ministarka privrede od 2024; status posle 17. 11. 2026. nerazjašnjen"],["vlada","Potpredsednica Vlade od 2025."]],s:[["Narodna skupština, aktuelni saziv","https://www.parlament.gov.rs/narodna-skupstina-/sastav/narodni-poslanici/aktuelni-saziv.890.html"],["CRTA, spisak 250 poslanika","https://crta.plus/updates/new-national-assembly-list-of-250-mps-2026/"],_S.mondo]},
  {id:"ragus",n:"Marina Raguš",m:`Raguš`,role:"Poslanica liste SNS.",desc:"Peta na listi. Govorila je u raspravi o izboru predsednika Skupštine.",
-  g:"sns",party:"SNS",fn:null,prev:[["skupstina","Potpredsednica Narodne skupštine 2024–2026."]],s:[_S.danas,_S.mondo]},
+  g:"sns",party:"SNS",fn:"Kandidat SNS za potpredsednika Skupštine",prev:[["skupstina","Potpredsednica Narodne skupštine 2024–2026."]],s:[_S.danas,_S.mondo]},
  {id:"mrdic",g:"sns",party:"SNS",fn:null,prev:[["skupstina","Narodni poslanik od 2020."]],u:1,s:[_S.mondo,["Wikipedia","https://en.wikipedia.org/wiki/Uglješa_Mrdić"]]},
  {id:"lecic",n:"Branislav Lečić",m:`Lečić${L}{0,3}`,role:"Poslanik liste SNS.",desc:"Glumac, petnaesti na listi.",
   g:"sns",party:"nestranački",fn:null,prev:[["vlada","Ministar kulture i informisanja 2001–2004."]],s:[_S.r021,["Wikipedia","https://sr.wikipedia.org/sr-el/Branislav_Lečić"]]},
  {id:"radeta",n:"Vjerica Radeta",m:`Vjeric${L}{1,2}\\sRadet${L}{1,2}`,role:"Poslanica liste SNS (SRS).",desc:"Funkcionerka Srpske radikalne stranke; jedna od četiri poslanika SRS izabrana na listi SNS.",
   g:"sns",party:"SRS",fn:"Predsednica verifikacionog odbora",prev:[["skupstina","Narodna poslanica u više saziva"]],u:1,s:[_S.r021,_S.mondo]},
  {id:"vukicevic",n:"Lidija Vukićević",m:`Vukićević${L}{0,3}`,role:"Poslanica liste SNS.",desc:"Glumica, deveta na listi.",
-  g:"sns",party:"SNS",fn:null,prev:[],s:[_S.r021,_S.danas]},
+  g:"sns",party:"SNS",fn:"Kandidat SNS za potpredsednika Skupštine",prev:[],s:[_S.r021,_S.danas]},
  /* Manjinske liste */
  {id:"pastor",n:"Balint Pastor",m:`Balint${L}{0,2}\\sPastor${L}{0,2}|Pastor${L}{0,2}`,role:"Predsednik SVM; narodni poslanik.",desc:"Najavio je da SVM glasa za Čupića i da ne podržava mesto potpredsednika Skupštine za opoziciju. Predlaže da manjinski poslanici mogu da obrazuju grupu od tri člana.",
   g:"svm",party:"SVM",fn:"Predstavnik SVM",prev:[["skupstina","Narodni poslanik u ranijim sazivima"]],s:[_S.danas,_S.mondo]},
