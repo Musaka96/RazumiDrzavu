@@ -59,6 +59,8 @@ U `public/data/vesti.js` (ili `dopune.js`) dodajte objekat:
 
 Posle izmene pokrenite `npm run build` da proverite sintaksu.
 
+Vesti se ažuriraju i automatski, tri puta dnevno, po uputstvu u [docs/azuriranje-vesti.md](docs/azuriranje-vesti.md).
+
 ## Dodavanje mehanizma
 
 Mehanizmi (hapšenje, pritvor, pomilovanje, mere REM-a…) su u `public/data/mehanizmi.js`, u nizu `MECH`. Panel mehanizma prikazuje opis, dijagram toka, ishode i vesti u kojima je korišćen; adresa je `#meh-<id>`.
