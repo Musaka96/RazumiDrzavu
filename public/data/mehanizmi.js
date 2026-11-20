@@ -34,7 +34,7 @@ const MECH=[
    {a:"apelacioni",w:"Veće višeg suda",t:"Dalje produženje",d:"Za dela sa propisanom kaznom većom od pet godina veće neposredno višeg suda može pritvor produžiti još najviše tri meseca.",r:"+3 meseca, ukupno 6"}],
   ends:[["Ukidanje pritvora","Čim prestanu razlozi, pritvor se ukida; tada se može odrediti blaža mera. Ako optužnica ne bude podignuta u roku, okrivljeni se pušta."],["Optužnica","Pošto je podignuta optužnica, o pritvoru odlučuje sud koji sudi, a rokovi se računaju drukčije."]],
   checks:["Pritvor se određuje samo ako se cilj ne može postići blažom merom.","Sud po službenoj dužnosti proverava da li razlozi još postoje.","Ustavna žalba i, na kraju, Evropski sud za ljudska prava."],
-  ev:["Uhapšen vlasnik Alta banke","pritvor za Radeta Bastu","Kričku određen pritvor","Uhapšeni dekan","Poternica za Milanom"]},
+  ev:["Uhapšen vlasnik Alta banke","pritvor za Radeta Bastu","Kričku određen pritvor","Uhapšeni dekan","Poternica za Milanom","Dridu i Maksimoviću određen pritvor"]},
 
  {id:"prijava",n:"Krivična prijava i odluka tužioca",b:"pro",inst:["tuzilastva","tok","vjtbg","vjt","tuzrz"],
   sum:"Svako može tužiocu prijaviti krivično delo; tužilac proverava navode i odlučuje da li će prijavu odbaciti ili pokrenuti istragu.",
