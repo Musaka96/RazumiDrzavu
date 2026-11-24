@@ -21,7 +21,7 @@ const MECH=[
    {a:"osnovni",w:"Sudija za prethodni postupak",t:"Žalba na zadržavanje",d:"Osumnjičeni i branilac mogu se žaliti sudiji, koji o tome hitno odlučuje.",r:"žalba za 6 h, odluka za 4 h"}],
   ends:[["Puštanje na slobodu","Ako nema razloga za pritvor, osumnjičeni se pušta; postupak može da se nastavi."],["Predlog za pritvor","Tužilac traži od suda pritvor ili blažu meru (vidi mehanizam „Pritvor“)."]],
   checks:["Sudija za prethodni postupak odlučuje o žalbi.","Branilac je obavezan od prvog saslušanja zadržanog.","Pretpostavka nevinosti važi do pravnosnažne presude."],
-  ev:["Uhapšeni načelnik UKP","Uhapšen vlasnik Alta banke","Uhapšen komandant SAJ","Uhapšen bivši ministar Rade Basta","Uhapšen pokrajinski sekretar","Nalozi za hapšenje vlasnika","Uhapšeni dekan","TOK: uhapšeno šest osoba"]},
+  ev:["Uhapšeni načelnik UKP","Uhapšen Pavle Bihali","Uhapšen vlasnik Alta banke","Uhapšen komandant SAJ","Uhapšen bivši ministar Rade Basta","Uhapšen pokrajinski sekretar","Nalozi za hapšenje vlasnika","Uhapšeni dekan","TOK: uhapšeno šest osoba"]},
 
  {id:"pritvor",n:"Pritvor i blaže mere",b:"jud",inst:["osnovni","apelacioni","tok","vjtbg","tuzilastva"],
   sum:"Sud na predlog tužioca može odrediti pritvor ako postoji opasnost od bekstva, uticaja na svedoke ili ponavljanja dela; pre toga mora razmotriti blaže mere.",
