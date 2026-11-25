@@ -28,8 +28,8 @@ const SK_STEPS=[
   ["17. 11.","Konstitutivna sednica","Potvrđeni mandati svih 250 poslanika. Od tog dana teče rok od 90 dana za izbor Vlade.","skupstina","done"],
   ["19. 11.","Izabran predsednik Skupštine","Aleksandar Čupić (Studentska lista) dobio je 140 glasova, Stojan Radenović (SNS) 97. Čupić time vrši i dužnost predsednika Republike.","skupstina","done"],
   ["19. 11.","Potpredsednici i generalni sekretar","Svih šest potpredsednika je sa Studentske liste (136–137 glasova); poslanici SNS napustili su salu. Generalna sekretarka je Mirjana Radaković (138 glasova).","skupstina","done"],
-  ["24. 11.","Odbori i delegacije","Nastavak konstitutivne sednice: izbor članova skupštinskih odbora i stalnih delegacija.","skupstina","now"],
-  ["do 27. 11.","Raspisivanje predsedničkih izbora","Raspisuje ih predsednik Skupštine, sada Čupić kao v.d. predsednika; glasanje najkasnije 27. 12.","predsednik","next"],
+  ["24–25. 11.","Odbori i delegacije","Izabrani članovi 20 odbora (133 glasa) i stalne delegacije (136 glasova); SNS ne učestvuje u radu odbora. Konstitutivna sednica završena 25. 11.","skupstina","done"],
+  ["do 27. 11.","Raspisivanje predsedničkih izbora","Raspisuje ih predsednik Skupštine, sada Čupić kao v.d. predsednika; glasanje najkasnije 27. 12.","predsednik","now"],
   ["sledi","Predlog mandatara","V.d. predsednika Republike posle konsultacija sa poslaničkim grupama predlaže kandidata za predsednika Vlade.","predsednik","next"],
   ["do 15. 2. 2027.","Izbor Vlade","Skupština glasa o programu i ministrima, većinom svih poslanika. Ako Vlada ne bude izabrana u roku, predsednik raspušta Skupštinu.","vlada","next"]
 ];
