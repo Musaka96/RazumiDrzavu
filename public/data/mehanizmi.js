@@ -34,7 +34,7 @@ const MECH=[
    {a:"apelacioni",w:"Veće višeg suda",t:"Dalje produženje",d:"Za dela sa propisanom kaznom većom od pet godina veće neposredno višeg suda može pritvor produžiti još najviše tri meseca.",r:"+3 meseca, ukupno 6"}],
   ends:[["Ukidanje pritvora","Čim prestanu razlozi, pritvor se ukida; tada se može odrediti blaža mera. Ako optužnica ne bude podignuta u roku, okrivljeni se pušta."],["Optužnica","Pošto je podignuta optužnica, o pritvoru odlučuje sud koji sudi, a rokovi se računaju drukčije."]],
   checks:["Pritvor se određuje samo ako se cilj ne može postići blažom merom.","Sud po službenoj dužnosti proverava da li razlozi još postoje.","Ustavna žalba i, na kraju, Evropski sud za ljudska prava."],
-  ev:["Uhapšen vlasnik Alta banke","pritvor za Radeta Bastu","Kričku određen pritvor","Uhapšeni dekan","Poternica za Milanom","Dridu i Maksimoviću određen pritvor"]},
+  ev:["Uhapšen vlasnik Alta banke","pritvor za Radeta Bastu","Kričku određen pritvor","Uhapšeni dekan","Poternica za Milanom","Dridu i Maksimoviću određen pritvor","Pavlu Bihaliju određen pritvor","brat vlasnika Alta banke"]},
 
  {id:"prijava",n:"Krivična prijava i odluka tužioca",b:"pro",inst:["tuzilastva","tok","vjtbg","vjt","tuzrz"],
   sum:"Svako može tužiocu prijaviti krivično delo; tužilac proverava navode i odlučuje da li će prijavu odbaciti ili pokrenuti istragu.",
@@ -96,7 +96,7 @@ const MECH=[
    {a:"osnovni",w:"Sud",t:"Trajno oduzimanje",d:"Posle potvrđivanja optužnice, a najkasnije godinu dana od pravnosnažne osuđujuće presude, tužilac traži trajno oduzimanje; vlasnik može dokazivati zakonito poreklo imovine."}],
   ends:[["Trajno oduzeta","Imovina prelazi u korist države."],["Vraćena","Ako nema osude ili je poreklo dokazano, imovina se vraća, uz moguću naknadu štete."]],
   checks:["Sud preispituje svaku tužiočevu hitnu meru.","Žalba na rešenja o oduzimanju."],
-  ev:["TOK zabranjuje Macuri raspolaganje"]},
+  ev:["TOK zabranjuje Macuri raspolaganje","brat vlasnika Alta banke"]},
 
  {id:"sudjenje",n:"Suđenje i pravni lekovi",b:"jud",inst:["osnovni","apelacioni","vrhovni","ustavni"],
   sum:"Prvostepeni sud sudi na glavnom pretresu; na presudu se izjavljuje žalba višem ili apelacionom sudu, a protiv pravnosnažne odluke ostaju vanredni pravni lekovi pred Vrhovnim sudom i ustavna žalba.",
@@ -108,7 +108,7 @@ const MECH=[
    {a:"ustavni",w:"Ustavni sud",t:"Ustavna žalba",d:"Kad su iscrpljeni pravni lekovi, zbog povrede ljudskih prava, na primer prava na pravično suđenje ili suđenje u razumnom roku."}],
   ends:[["Pravnosnažna presuda","Presuda se izvršava; posle nje ostaju samo vanredni pravni lekovi."],["Ponovno suđenje","Ako je presuda ukinuta, predmet se vraća prvostepenom sudu."]],
   checks:["Dvostepenost: o svakoj prvostepenoj presudi može da odlučuje viši sud.","Posle domaćih lekova ostaje predstavka Evropskom sudu za ljudska prava."],
-  ev:["Počinje suđenje za „Generalštab“","Nadstrešnica pred Vrhovnim sudom","Poništena presuda o diskriminaciji","druga godišnjica bez suđenja"]},
+  ev:["Počinje suđenje za „Generalštab“","Nadstrešnica pred Vrhovnim sudom","Poništena presuda o diskriminaciji","druga godišnjica bez suđenja","Apelacioni sud odbacio optužnicu VJT"]},
 
  {id:"izuzece",n:"Izuzeće sudije ili tužioca",b:"jud",inst:["osnovni","tuzilastva","vjtbg","vjt"],
   sum:"Stranka može tražiti da sudija ili tužilac bude isključen iz predmeta ako postoji sumnja u njegovu nepristrasnost.",
